@@ -33,7 +33,7 @@ export default function ProductDetailsScreen() {
 
     <div>
 
-        <Container className="container">
+        <Container className="container1">
       <Row>
         <Col lg>
         <div className='left1'>

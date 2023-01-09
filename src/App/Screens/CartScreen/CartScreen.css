@@ -1,0 +1,54 @@
+.ordercard{
+    /* width:150%; */
+    /* height:450px; */
+}
+.cardimg{
+    height:50%;
+    width:100%;
+}
+.quantity{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1rem;
+}
+.plus-btn{
+    width: 30px;
+    height: 30px;
+    object-fit: fill;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+    margin: 10px;
+}
+.minus-btn{
+    width: 30px;
+    height: 30px;
+    object-fit: fill;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+    margin: 10px;
+}
+
+.input{
+    width: 30px;
+    height: 30px;
+    object-fit: fill;
+    /* border-radius: 50%; */
+    background-color: #ffffff;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+    margin: 10px;
+    text-align: center;
+}
+
+Label{
+    color:white;
+}

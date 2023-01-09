@@ -22,6 +22,10 @@ import ProductScreen from './App/Screens/ProductScreen/ProductScreen';
 import CorouselCenter from './App/Components/CarouselCenter/CarouselCenter';
 import CarouselComp from './App/Components/Carousel/Carousel';
 import ProductDetailsScreen from './App/Screens/ProductDetailsScreen/ProductDetailsScreen';
+import CartScreen from "./App/Screens/CartScreen/CartScreen";
+import AccountScreen from "./App/Screens/AccountScreen/AccountScreen";
+import CheckoutScreen from './App/Screens/CheckoutScreen/CheckoutScreen';
+
 import colors from './App/Config/colors';
 
 
@@ -86,6 +90,26 @@ function App() {
     )
   }
 
+  const CartScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <CartScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
+  const CheckoutScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <CheckoutScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
   return (
     <div>
       
@@ -93,12 +117,15 @@ function App() {
     <GlobalStyle />
 
       <Routes>
-        
+
+        <Route path="/auth" element={<AuthScreen />} />
         <Route path="/" element={<Home />} />
         <Route path="/product/id" element={<ProductDetails />} />
-        <Route path="/auth" element={<AuthScreen />} />
-        <Route path="/payment" element={<Pay />} />
-        <Route path="/payment/success" element={<Success />} />
+        <Route path="/checkout/payment" element={<Pay />} />
+        <Route path="/cart" element={<CartScreenContainer />} />
+        <Route path="/checkout" element={<CheckoutScreenContainer/>} />
+        <Route path="/account" element={<AccountScreen/>} />
+        <Route path="/checkout/payment/success" element={<Success />} />
       </Routes>
 
 

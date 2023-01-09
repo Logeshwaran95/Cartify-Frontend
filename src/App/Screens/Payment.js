@@ -1,6 +1,8 @@
 import { useState,useEffect } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { useNavigate } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
+import Swal from 'sweetalert2'
 
 import axios from 'axios';
 
@@ -11,7 +13,7 @@ const Pay = () => {
     //redirect to payment success page
     let navigate = useNavigate();
     const redirectToSuccessPage =() => {
-      navigate('/payment/success');
+      navigate('/');
     };
 
     const [stripeToken,setStripeToken] = useState(null);
@@ -28,12 +30,25 @@ const Pay = () => {
                     tokenId:stripeToken.id,
                     amount:1000
                 })
-                const response = await axios.post('http://localhost:3000/checkout/payment',data,
+                const response = await axios.post('http://localhost:4000/checkout/payment',data,
                 {headers:{"Content-Type" : "application/json"}}
                 );
                 console.log(response.data);
                 if(response.data.message === "Payment Successful"){
-                    redirectToSuccessPage();
+                    Swal.fire(
+                        'Payment Successfull !',
+                        'Order Placed Successfully',
+                        'success'
+                      ).then(()=> {
+                        navigate("/");
+                      })
+                }
+                else{
+                    Swal.fire(
+                        'Payment Failed !',
+                        'Order Processing Failed ! Try Again',
+                        'error'
+                    )
                 }
             }
             catch(err){
@@ -58,7 +73,11 @@ const Pay = () => {
             token={onToken}
             stripeKey={publishableKey}
         >
-              <button>Pay Now</button>
+    
+        <Button variant="primary"
+        
+        >Pay With Credit Card</Button>
+    
         </StripeCheckout>
         </div>
       

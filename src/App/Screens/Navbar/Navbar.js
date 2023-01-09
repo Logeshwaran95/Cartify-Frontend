@@ -55,41 +55,27 @@ function OffcanvasExample() {
                 <ul>
     <li class="myli"><a href="/" className="mya">
       <Link to="/"
-      style={{
-        textDecoration:"none",
-        color:"white"
-      }}
+      className="linkbtn"
       >home</Link>
       </a></li>
-    <li class="myli"><a href="#" className="mya">
-    <Link to="/"
-      style={{
-        textDecoration:"none",
-        color:"white"
-      }}
-      >Latest</Link>
-      </a></li>
-    <li class="myli"><a href="#" className="mya">   <Link to="/"
-      style={{
-        textDecoration:"none",
-        color:"white"
-      }}
+    <li class="myli"><a href="#" className="mya">  
+     <Link to="/seller"
+className="linkbtn"
       >Seller</Link>
       </a></li>
     <li class="myli"><a href="#" className="mya"> 
-    <Link to="/"
-      style={{
-        textDecoration:"none",
-        color:"white"
-      }}
+    <Link to="/cart"
+    className="linkbtn"
       >Cart</Link>
        </a></li>
-    <li class="myli"><a href="#" className="mya"> 
+       <li class="myli"><a href="#" className="mya">
     <Link to="/"
-      style={{
-        textDecoration:"none",
-        color:"white"
-      }}
+   className="linkbtn"
+      >Notifications</Link>
+      </a></li>
+    <li class="myli"><a href="#" className="mya"> 
+    <Link to="/account"
+className="linkbtn"
       >Account</Link>
        </a></li>
   </ul>
