@@ -109,6 +109,7 @@
     border-radius: 20px;
     border: 2px solid white;
     transition: all 0.5s ease;
+    background-color: white;
 }
 
 .sizebtn:hover{
@@ -129,6 +130,7 @@
     border-radius: 50%;
     /* border: 2px solid white; */
     transition: all 0.5s ease;
+    box-shadow: 0 0 50px rgb(198, 194, 194);
 }
 
 
@@ -161,16 +163,24 @@
     height: 40px;
     object-fit: fill;
     border-radius: 10px;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
     margin-top: 2rem;
     border-color: white;
     border:2px solid white;
     transition: all 0.5s ease;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12)
 }
 
 .addtocartbtn:hover{
     letter-spacing: 2px;
     transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+    
 }
 
 .quantity{
@@ -185,7 +195,7 @@
     height: 30px;
     object-fit: fill;
     border-radius: 50%;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
     border-color: white;
     border:2px solid white;
     transition: all 0.5s ease;
@@ -196,7 +206,7 @@
     height: 30px;
     object-fit: fill;
     border-radius: 50%;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
     border-color: white;
     border:2px solid white;
     transition: all 0.5s ease;
@@ -208,13 +218,15 @@
     height: 30px;
     object-fit: fill;
     /* border-radius: 50%; */
-    background-color: #f1f1f1;
+    background-color: #ffffff;
     border-color: white;
     border:2px solid white;
     transition: all 0.5s ease;
     margin: 10px;
     text-align: center;
 }
+
+
 
 
 .title{
@@ -227,6 +239,7 @@
     margin:2rem;
     color: white;
 }
+
 
 table {
     border: 1px solid #ccc;
@@ -362,6 +375,13 @@ a{
     transition: all 0.3 ease-in-out;
     border-radius: 10px;
     letter-spacing:1px;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12)
 }
 
 .testimonial-box::before{

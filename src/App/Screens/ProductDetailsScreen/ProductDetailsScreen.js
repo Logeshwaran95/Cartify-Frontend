@@ -3,6 +3,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import ProductScreen from '../ProductScreen/ProductScreen';
 
 import './ProductDetailsScreen.css';
 
@@ -138,11 +139,13 @@ export default function ProductDetailsScreen() {
     <Tabs
       defaultActiveKey="Description"
       id="justify-tab-example"
-      className="mb-3"
+      className="myClass"
       justify
     >
       <Tab eventKey="Description" title="Description"
-      
+      style={{
+        color: "white",
+      }}
       >
         <h2 
         className="title"
@@ -311,6 +314,12 @@ export default function ProductDetailsScreen() {
 
       </Tab>
     </Tabs>
+
+    <h2 className='title'>
+      Similar Products
+    </h2>
+      
+     <ProductScreen/>
 
     </div>
     
