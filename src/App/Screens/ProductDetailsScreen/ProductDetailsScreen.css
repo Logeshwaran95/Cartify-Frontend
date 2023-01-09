@@ -1,0 +1,241 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 1200px;
+    width: 100%;
+    background-color: white;
+    padding:3rem;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background: #fafafa;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+  position: relative;
+  z-index: 1;
+  background: inherit;
+  overflow: hidden;
+  
+}
+
+.container:before{
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    filter: blur(10px);
+    
+}
+.left1{
+    margin:2rem;
+}
+
+.right1{
+    margin:2rem;
+}
+
+.center{
+    margin:2rem;
+}
+
+.center img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    
+}
+
+.left1 h2{
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    margin-bottom: 16px;
+}
+.left1 p{
+    text-align: justify;
+    color: white;
+}
+
+.right1 h2{
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    margin-bottom: 16px;
+}
+
+.right1 p{
+    text-align: justify;
+    color: white;
+}
+
+
+
+.imgchoicegrp{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.imgchoice{
+    width: 30%;
+    height: 30%;
+    object-fit: fill;
+    border-radius: 10px;
+}
+
+.sizegrp{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.sizebtn{
+    width: 20%;
+    height: 30%;
+    object-fit: fill;
+    border-radius: 20px;
+    border: 2px solid white;
+    transition: all 0.5s ease;
+}
+
+.sizebtn:hover{
+    transform: scale3d(1.1, 1.1, 1.1);
+}
+
+.colorgrp{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.colorbtn{
+    width: 60px;
+    height: 50px;
+    object-fit: fill;
+    border-radius: 50%;
+    /* border: 2px solid white; */
+    transition: all 0.5s ease;
+}
+
+
+.colorbtn:hover{
+    transform: scale3d(1.1, 1.1, 1.1);
+}
+
+.red{
+    background-color: red;
+    border:2px solid red;
+}
+
+.blue{
+    background-color: blue;
+    border:2px solid blue;
+}
+
+.green{
+    background-color: green;
+    border:2px solid green;
+}
+
+.yellow{
+    background-color: yellow;
+    border:2px solid yellow;
+}
+
+.addtocartbtn{
+    width: 100%;
+    height: 40px;
+    object-fit: fill;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    margin-top: 2rem;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+}
+
+.addtocartbtn:hover{
+    letter-spacing: 2px;
+    transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+}
+
+.quantity{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.plus-btn{
+    width: 30px;
+    height: 30px;
+    object-fit: fill;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+    margin: 10px;
+}
+.minus-btn{
+    width: 30px;
+    height: 30px;
+    object-fit: fill;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+    margin: 10px;
+}
+
+.input{
+    width: 30px;
+    height: 30px;
+    object-fit: fill;
+    /* border-radius: 50%; */
+    background-color: #f1f1f1;
+    border-color: white;
+    border:2px solid white;
+    transition: all 0.5s ease;
+    margin: 10px;
+    text-align: center;
+}
+
+
+
+@media screen and (max-width: 768px){
+    .container{
+        flex-direction: column;
+    }
+    .left1{
+        margin-bottom: 2rem;
+        margin: 0rem;
+    }
+    .right1{
+        margin-bottom: 2rem;
+        margin:0rem;
+    }
+    .center{
+        margin-bottom: 2rem;
+        margin:1rem;
+    }
+    .colorbtn{
+        margin:0.5rem;
+    }
+}
+

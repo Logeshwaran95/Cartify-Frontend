@@ -1,0 +1,10 @@
+.pscreen{
+    margin:1.5rem;
+}
+
+@media screen and (max-width: 348px) {
+    .pscreen{
+        margin:0rem;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,19 @@
+.centercontainer{
+    margin:1.5rem;
+}
+.new img{
+    max-width: 90%;
+}
+
+@media (max-width:450px){
+    .new img{
+        /* min-height:100px; */
+        min-height: 150px;
+        max-width:95%;
+    }
+    .centercontainer{
+        margin:0.5rem;
+        overflow: hidden;
+    }
+}
+

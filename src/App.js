@@ -18,10 +18,16 @@ import { createGlobalStyle } from 'styled-components';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
+import ProductScreen from './App/Screens/ProductScreen/ProductScreen';
+import CorouselCenter from './App/Components/CarouselCenter/CarouselCenter';
+import CarouselComp from './App/Components/Carousel/Carousel';
+import ProductDetailsScreen from './App/Screens/ProductDetailsScreen/ProductDetailsScreen';
+import colors from './App/Config/colors';
+
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+    background-image: ${colors.primary};
   }
 `;
 
@@ -36,14 +42,35 @@ function App() {
     
   }, [])
 
-  const Welcome = () => {
+  const Home = () => {
     return (
       <div>
         <Navbar />
-     
-        <h1 style={{marginTop:"5rem"}}>Welcome </h1>
-        <h1>hey</h1>
+
+        <h1>Now ON the Air</h1>
+
+        <CarouselComp/>
+
+        <h1>Trending</h1>
+
+        <ProductScreen/>
+
+        <h1>Top Rated</h1>
+
+        <ProductScreen/>
+
+        <CorouselCenter />
         
+        <Footer />
+      </div>
+    )
+  }
+
+  const ProductDetails = () => {
+    return (
+      <div>
+        <Navbar />
+        <ProductDetailsScreen />
         <Footer />
       </div>
     )
@@ -57,7 +84,8 @@ function App() {
 
       <Routes>
         
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product/id" element={<ProductDetails />} />
         <Route path="/auth" element={<AuthScreen />} />
         <Route path="/payment" element={<Pay />} />
         <Route path="/payment/success" element={<Success />} />

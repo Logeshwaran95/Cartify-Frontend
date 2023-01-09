@@ -11,6 +11,7 @@ footer{
   z-index: 1;
   background: inherit;
   overflow: hidden;
+  padding: 20px 0;
   }
   footer::before{
     content: "";
