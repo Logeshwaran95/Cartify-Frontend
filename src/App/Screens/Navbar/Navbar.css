@@ -42,6 +42,11 @@
     color: black;
   }
 
+  .logo{
+    width:100px;
+    height:35px;
+  }
+
   ol,
   ul {
     list-style: none;
@@ -114,6 +119,18 @@
       border-color: rgb(0, 0, 0);
       margin:3px;
       color:black; */
+  }
+  .logo{
+    height:40px;
+  }
+  #searchbtn{
+    border-color: black;
+    color:black;
+
+  }
+  #searchbtn:hover{
+    background-color: rgb(0, 0, 0);
+    color:white;
   }
     .myli{
         display: block;

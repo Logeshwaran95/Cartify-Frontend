@@ -15,6 +15,10 @@ export default function Cart() {
   const [quantity, setQuantity] = React.useState(1);
   const [total, setTotal] = React.useState(1);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  })
+
   const items = ['item1', 'item2', 'item3', 'item4', 'item5']
 
   return (

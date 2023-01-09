@@ -42,31 +42,31 @@ export default class CenterMode extends Component {
       <div className="centercontainer">
         <Slider {...settings}>
           <div className="new">
-            <img src="https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&w=1000&q=80" alt=""
+            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
             // className="imgcenter1"
        
             />
           </div>
           <div className="new">
-            <img src="https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&w=1000&q=80" alt=""
+            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
             // className="imgcenter1"
         
             />
           </div>
           <div className="new">
-            <img src="https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&w=1000&q=80" alt=""
+            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
             // className="imgcenter1"
        
             />
           </div>
           <div className="new">
-            <img src="https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&w=1000&q=80" alt=""
+            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
             // className="imgcenter1"
        
             />
           </div>
           <div className="new">
-            <img src="https://images.unsplash.com/photo-1505751171710-1f6d0ace5a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&w=1000&q=80" alt=""
+            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
             // className="imgcenter1"
  
             />

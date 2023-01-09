@@ -8,7 +8,7 @@ export default function ProductCard() {
     	<div class="product-card">
 		<div class="badge">Hot</div>
 		<div class="product-tumb">
-			<img src="https://i.imgur.com/xdbHo4E.png" alt=""/>
+			<img src="https://i.gadgets360cdn.com/products/large/asus-rog-strix-g15-1200x800-1615983324.jpg?downsize=*:360" alt=""/>
 		</div>
 		<div class="product-details">
 			<span class="product-catagory">Women,bag</span>

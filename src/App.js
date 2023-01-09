@@ -25,6 +25,7 @@ import ProductDetailsScreen from './App/Screens/ProductDetailsScreen/ProductDeta
 import CartScreen from "./App/Screens/CartScreen/CartScreen";
 import AccountScreen from "./App/Screens/AccountScreen/AccountScreen";
 import CheckoutScreen from './App/Screens/CheckoutScreen/CheckoutScreen';
+import SellerScreen from './App/Screens/SellerScreen/SellerScreen';
 
 import colors from './App/Config/colors';
 
@@ -46,7 +47,7 @@ function App() {
     
   }, [])
 
-  const Home = () => {
+  const HomeContainer = () => {
     return (
       <div>
         <Navbar />
@@ -80,7 +81,7 @@ function App() {
     )
   }
 
-  const ProductDetails = () => {
+  const ProductDetailsContainer = () => {
     return (
       <div>
         <Navbar />
@@ -110,6 +111,26 @@ function App() {
     )
   }
 
+  const AccountScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <AccountScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
+  const SellerScreenContainer = () => {
+    return (
+      <div>
+        <Navbar />
+        <SellerScreen />
+        <Footer />
+      </div>
+    )
+  }
+
   return (
     <div>
       
@@ -119,13 +140,12 @@ function App() {
       <Routes>
 
         <Route path="/auth" element={<AuthScreen />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/product/id" element={<ProductDetails />} />
-        <Route path="/checkout/payment" element={<Pay />} />
+        <Route path="/" element={<HomeContainer />} />
+        <Route path="/product/id" element={<ProductDetailsContainer />} />
         <Route path="/cart" element={<CartScreenContainer />} />
+        <Route path="/seller" element={<SellerScreenContainer/>} />
         <Route path="/checkout" element={<CheckoutScreenContainer/>} />
-        <Route path="/account" element={<AccountScreen/>} />
-        <Route path="/checkout/payment/success" element={<Success />} />
+        <Route path="/account" element={<AccountScreenContainer/>} />
       </Routes>
 
 

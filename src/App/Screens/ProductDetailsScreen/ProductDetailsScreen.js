@@ -29,6 +29,10 @@ export default function ProductDetailsScreen() {
   const [currImage, setCurrImage] = React.useState(images[0].original);
   const [quantity, setQuantity] = React.useState(1);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  })
+
   return (
 
     <div>

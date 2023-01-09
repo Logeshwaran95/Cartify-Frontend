@@ -10,7 +10,12 @@ import Payment from "../Payment";
 
 export default function CheckoutScreen() {
 
+
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  })
 
   const handleCOD = () => {
     Swal.fire({

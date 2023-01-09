@@ -24,6 +24,7 @@ function OffcanvasExample() {
         breakpoint={expand}
         variant='dark'
         fixed='top'
+        
         id="navbar"
         style={{
           borderBottomLeftRadius: '10px',
@@ -38,7 +39,13 @@ function OffcanvasExample() {
             style={{
               fontSize: '1.5rem',
             }}
-            >Cartify</Navbar.Brand>
+            >
+              {/* <img 
+              src="cartify1.png"
+              className="logo"
+              /> */}
+              Cartify
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -68,11 +75,11 @@ className="linkbtn"
     className="linkbtn"
       >Cart</Link>
        </a></li>
-       <li class="myli"><a href="#" className="mya">
+       {/* <li class="myli"><a href="#" className="mya">
     <Link to="/"
    className="linkbtn"
       >Notifications</Link>
-      </a></li>
+      </a></li> */}
     <li class="myli"><a href="#" className="mya"> 
     <Link to="/account"
 className="linkbtn"
@@ -110,6 +117,7 @@ className="linkbtn"
                   onClick={() => {
                     alert("Search button clicked");
                   }}
+                  id="searchbtn"
                   >Search</Button>
                 </Form>
               </Offcanvas.Body>
