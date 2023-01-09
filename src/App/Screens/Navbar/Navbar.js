@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { Link } from 'react-router-dom';
 import "./Navbar.css"
 import { createGlobalStyle } from 'styled-components';
 
@@ -33,7 +34,11 @@ function OffcanvasExample() {
         >
           <Container fluid>
            
-            <Navbar.Brand href="#">Cartify</Navbar.Brand>
+            <Navbar.Brand href="#"
+            style={{
+              fontSize: '1.5rem',
+            }}
+            >Cartify</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -48,11 +53,45 @@ function OffcanvasExample() {
               <Offcanvas.Body>
                 <Nav className="justify-content-center mr-auto flex-grow-1 pe-3">
                 <ul>
-    <li class="myli"><a href="#" className="mya">home</a></li>
-    <li class="myli"><a href="#" className="mya">Latest</a></li>
-    <li class="myli"><a href="#" className="mya">Seller</a></li>
-    <li class="myli"><a href="#" className="mya"> Cart </a></li>
-    <li class="myli"><a href="#" className="mya"> Account </a></li>
+    <li class="myli"><a href="/" className="mya">
+      <Link to="/"
+      style={{
+        textDecoration:"none",
+        color:"white"
+      }}
+      >home</Link>
+      </a></li>
+    <li class="myli"><a href="#" className="mya">
+    <Link to="/"
+      style={{
+        textDecoration:"none",
+        color:"white"
+      }}
+      >Latest</Link>
+      </a></li>
+    <li class="myli"><a href="#" className="mya">   <Link to="/"
+      style={{
+        textDecoration:"none",
+        color:"white"
+      }}
+      >Seller</Link>
+      </a></li>
+    <li class="myli"><a href="#" className="mya"> 
+    <Link to="/"
+      style={{
+        textDecoration:"none",
+        color:"white"
+      }}
+      >Cart</Link>
+       </a></li>
+    <li class="myli"><a href="#" className="mya"> 
+    <Link to="/"
+      style={{
+        textDecoration:"none",
+        color:"white"
+      }}
+      >Account</Link>
+       </a></li>
   </ul>
                   {/* <Nav.Link href="#" style={{marginLeft:"20px"}}>Home</Nav.Link>
                   <Nav.Link href="#" style={{marginLeft:"20px"}}>Cart</Nav.Link>

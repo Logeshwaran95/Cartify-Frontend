@@ -1,3 +1,4 @@
+import { borderRadius } from '@mui/system';
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
@@ -79,7 +80,7 @@ export default function ProductDetailsScreen() {
     </button>
 
     <input type="text" name="name" value={quantity} className="input"/>
-    
+
     <button className="plus-btn" type="button" name="button"
     onClick={() => setQuantity(quantity + 1)}
     >
@@ -94,8 +95,21 @@ export default function ProductDetailsScreen() {
         </Col>
         <Col lg>
         <div className='right1'>
-          <h2>Reviews</h2>
-          <p>4.5 *</p>
+          <h2>Reviews Overall 
+            <span 
+            style={{
+              color:"yellow",
+            }}
+            > 4.5</span>
+             </h2>
+          <p>1234 ratings</p>
+          <div class="reviews">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="far fa-star"></i>
+           </div>
 
           <div className='sizegrp'>
             <button className='sizebtn'>S</button>
@@ -127,14 +141,174 @@ export default function ProductDetailsScreen() {
       className="mb-3"
       justify
     >
-      <Tab eventKey="Description" title="Description">
-        <h2>Description</h2>
+      <Tab eventKey="Description" title="Description"
+      
+      >
+        <h2 
+        className="title"
+        >Description</h2>
+
+        <p className='desc'>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
+        </p>
+
       </Tab>
       <Tab eventKey="Offers" title="Offers">
-        <h2>Offers</h2>
+        <h2 
+        className='title'
+        >Offers</h2>
+
+  <table>
+  <thead>
+    <tr>
+      <th scope="col">Account</th>
+      <th scope="col">Validity</th>
+      <th scope="col">Discount</th>
+      <th scope="col">Period</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td data-label="Account">Visa - 3412</td>
+      <td data-label="Due Date">04/01/2016</td>
+      <td data-label="Amount">$1,190</td>
+      <td data-label="Period">03/01/2016 - 03/31/2016</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Account">Visa - 6076</td>
+      <td data-label="Due Date">03/01/2016</td>
+      <td data-label="Amount">$2,443</td>
+      <td data-label="Period">02/01/2016 - 02/29/2016</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Account">Corporate AMEX</td>
+      <td data-label="Due Date">03/01/2016</td>
+      <td data-label="Amount">$1,181</td>
+      <td data-label="Period">02/01/2016 - 02/29/2016</td>
+    </tr>
+    <tr>
+      <td scope="row" data-label="Acount">Visa - 3412</td>
+      <td data-label="Due Date">02/01/2016</td>
+      <td data-label="Amount">$842</td>
+      <td data-label="Period">01/01/2016 - 01/31/2016</td>
+    </tr>
+  </tbody>
+</table>
       </Tab>
       <Tab eventKey="Reviews" title="Reviews">
-        <h2>Reviews</h2>
+        <h2
+        className='title'
+        >Reviews</h2>
+
+<section id="testimonials">
+ 
+  
+ <div class="testimonial-box-container">
+   
+   
+     <div class="testimonial-box">
+       
+         <div class="box-top">
+            
+           
+             <div class="profile">
+              
+               
+                 <div class="profile-img">
+                     <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                 </div>
+               
+                 <div class="name-user">
+                     <strong>Liam mendes</strong>
+                     <span>@liammendes</span>
+                 </div>
+             </div>
+          
+             <div class="reviews">
+                 <i class="fas fa-star"></i>
+                 <i class="fas fa-star"></i>
+                 <i class="fas fa-star"></i>
+                 <i class="fas fa-star"></i>
+                 <i class="far fa-star"></i>
+             </div>
+         </div>
+
+         <div class="client-comment">
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+         </div>
+     </div>
+
+     <div class="testimonial-box">
+       
+       <div class="box-top">
+          
+         
+           <div class="profile">
+            
+             
+               <div class="profile-img">
+                   <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+               </div>
+             
+               <div class="name-user">
+                   <strong>Liam mendes</strong>
+                   <span>@liammendes</span>
+               </div>
+           </div>
+        
+           <div class="reviews">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="far fa-star"></i>
+           </div>
+       </div>
+
+       <div class="client-comment">
+           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+       </div>
+   </div>
+
+
+
+   <div class="testimonial-box">
+       
+       <div class="box-top">
+          
+         
+           <div class="profile">
+            
+             
+               <div class="profile-img">
+                   <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+               </div>
+             
+               <div class="name-user">
+                   <strong>Liam mendes</strong>
+                   <span>@liammendes</span>
+               </div>
+           </div>
+        
+           <div class="reviews">
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="fas fa-star"></i>
+               <i class="far fa-star"></i>
+           </div>
+       </div>
+
+       <div class="client-comment">
+           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+       </div>
+   </div>
+   
+   
+  
+     </div>
+</section>
+
       </Tab>
     </Tabs>
 

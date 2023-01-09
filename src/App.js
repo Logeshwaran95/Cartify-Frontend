@@ -47,17 +47,27 @@ function App() {
       <div>
         <Navbar />
 
-        <h1>Now ON the Air</h1>
+        <h2
+        className='titleText'
+        >Now On the Air</h2>
 
         <CarouselComp/>
 
-        <h1>Trending</h1>
+        <h2
+        className='titleText'
+        >Prime Deals</h2>
 
         <ProductScreen/>
 
-        <h1>Top Rated</h1>
+        <h2
+        className='titleText'
+        >Trending</h2>
 
         <ProductScreen/>
+
+        <h2
+        className='titleText'
+        >Offers</h2>
 
         <CorouselCenter />
         

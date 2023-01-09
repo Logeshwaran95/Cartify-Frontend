@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 export default function ProductCard() {
   return (
-    <div>
+    <Link to="/product/id">
     	<div class="product-card">
 		<div class="badge">Hot</div>
 		<div class="product-tumb">
@@ -24,6 +25,6 @@ export default function ProductCard() {
 	</div>
 
    
-    </div>
+    </Link>
   )
 }

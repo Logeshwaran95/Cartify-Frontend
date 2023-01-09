@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     /* background-color: linear-gradient(to right, #e66465, #9198e5); */
+    font-family: kanit ;
 }
 
+.titleText{
+    margin:1.5rem;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
