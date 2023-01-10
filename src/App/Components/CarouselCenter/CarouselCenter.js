@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "./CarouselCenter.css"
 
 export default class CenterMode extends Component {
+  
   render() {
+
+    const items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+
     const settings = {
       className: "center",
       centerMode: true,
@@ -41,39 +46,20 @@ export default class CenterMode extends Component {
     return (
       <div className="centercontainer">
         <Slider {...settings}>
-          <div className="new">
-            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
-            // className="imgcenter1"
-       
-            />
-          </div>
-          <div className="new">
-            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
-            // className="imgcenter1"
-        
-            />
-          </div>
-          <div className="new">
-            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
-            // className="imgcenter1"
-       
-            />
-          </div>
-          <div className="new">
-            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
-            // className="imgcenter1"
-       
-            />
-          </div>
-          <div className="new">
-            <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
-            // className="imgcenter1"
- 
-            />
-          </div>
-         
+
+          {items.map(
+            (item) => 
           
-         
+          <Link to="/product/id">
+          <div className="new">
+          <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
+          // className="imgcenter1"
+     
+          />
+        </div>
+        </Link>
+          )}
+   
         </Slider>
       </div>
     );

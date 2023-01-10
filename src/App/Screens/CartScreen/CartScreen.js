@@ -40,14 +40,14 @@ export default function Cart() {
       <Row lg={4} sm={3}
           style={{
             width:"100vw",
-            overflow:"hidden"
+            overflow:"hidden",
           }}>
 
         
           {items.map(
             () => 
               <Col style={{
-                margin:"1rem"
+                margin:"1rem",
               }}>
                   
             <Card className='ordercard'>
@@ -124,6 +124,15 @@ export default function Cart() {
     </Container>
 
     <br></br>
+
+    
+    <h2 style={{
+        color: 'white',
+        textAlign: 'center',
+        fontWeight:'800',
+        letterSpacing: '1px',
+        margin:'1.5rem'
+      }}>Cart Summary</h2>
 
     <Container>
       <Row>

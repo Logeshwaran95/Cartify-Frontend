@@ -65,11 +65,11 @@ function OffcanvasExample() {
       className="linkbtn"
       >home</Link>
       </a></li>
-    <li class="myli"><a href="#" className="mya">  
+    {/* <li class="myli"><a href="#" className="mya">  
      <Link to="/seller"
 className="linkbtn"
       >Seller</Link>
-      </a></li>
+      </a></li> */}
     <li class="myli"><a href="#" className="mya"> 
     <Link to="/cart"
     className="linkbtn"

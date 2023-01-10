@@ -28,8 +28,11 @@ import AccountScreen from "./App/Screens/AccountScreen/AccountScreen";
 import CheckoutScreen from './App/Screens/CheckoutScreen/CheckoutScreen';
 import SellerScreen from './App/Screens/SellerScreen/SellerScreen';
 
-import colors from './App/Config/colors';
 
+import colors from './App/Config/colors';
+import { Button, Nav } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import OrdersScreen from './App/Screens/OrdersScreen/OrdersScreen';
 // const GlobalStyle = createGlobalStyle`
 //   body {
 //     background-image: ${colors.primary};
@@ -62,37 +65,7 @@ function App() {
       <div>
         <Navbar />
 
-        <div style={{
-          display:"flex",
-          justifyContent:"center",
-          alignItems:"center",
-          marginTop:"20px",
-          flexWrap:"wrap"
-
-        }}>
-        
-        <button onClick={() => {
-          setTheme(colors.primary);
-          localStorage.setItem('CartifyTheme', colors.primary);
-        }}
-        class="toggler" style={{background:colors.primary}}></button>
-        <button onClick={() => {
-          setTheme("linear-gradient(to right, #f2709c, #ff9472)");
-          localStorage.setItem('CartifyTheme', 'linear-gradient(to right, #f2709c, #ff9472)');
-        }} class="toggler" style={{background:"linear-gradient(to right, #f2709c, #ff9472)"}}></button>
-        <button onClick={() => {
-          setTheme("linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%)");
-          localStorage.setItem('CartifyTheme', 'linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%)');
-        }} class="toggler" style={{background:"linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%)"}}></button>
-        <button onClick={() => {
-          setTheme("linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)");
-          localStorage.setItem('CartifyTheme', 'linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)');
-        }} class="toggler" style={{background:"linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)"}}></button>
-        <button onClick={() => {
-          setTheme("linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )");
-          localStorage.setItem('CartifyTheme', 'linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )');
-        }} class="toggler" style={{background:"linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )"}}></button>
-        </div>
+       
 
         <h2
         className='titleText'
@@ -157,7 +130,13 @@ function App() {
     return (
       <div>
         <Navbar/>
-        <AccountScreen/>
+
+       
+
+
+        <AccountScreen
+          setTheme={setTheme}
+        />
         <Footer/>
       </div>
     )
@@ -170,6 +149,16 @@ function App() {
         <SellerScreen />
         <Footer />
       </div>
+    )
+  }
+
+  const OrdersScreenContainer = () => {
+    return (
+       <div>
+            <Navbar/>
+            <OrdersScreen/>
+            <Footer/>
+       </div>   
     )
   }
 
@@ -190,6 +179,7 @@ function App() {
         <Route path="/seller" element={<SellerScreenContainer/>} />
         <Route path="/checkout" element={<CheckoutScreenContainer/>} />
         <Route path="/account" element={<AccountScreenContainer/>} />
+        <Route path="/orders" element={<OrdersScreenContainer/>} />
       </Routes>
 
 
