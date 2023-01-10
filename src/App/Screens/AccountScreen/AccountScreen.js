@@ -4,7 +4,7 @@ import "./AccountScreen.css"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import colors from '../../Config/colors';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 
 import { Link } from 'react-router-dom';
 
@@ -79,7 +79,7 @@ class="toggler" style={{background:colors.primary}}></button>
           textAlign:"center",
         }}
         > 
-          <div className="profile1">
+          <div className="accprofile1">
           
           <div>
           <img src="https://i.pinimg.com/originals/9a/69/29/9a6929f30854dfeffcceb163945cd3b0.png" alt="Group-1" border="0"
@@ -109,25 +109,49 @@ class="toggler" style={{background:colors.primary}}></button>
           <Row lg={1} >
 
               <Col
+
+              lg={9}
+
               style={{
                 textAlign:"center",
                 marginTop:"10%"
               }}
               >
+
+
                 <Link to="/orders">
-              <Button variant="primary" className="accbtn"
+
+              <Button variant="primary" className="accbtn1" style={{
+                margin:"1rem",
+              }}
               >
                   Your Orders
                 </Button>
+
                 </Link>
-              <Button variant="primary" className="accbtn">
-                  Your Favourites
+
+              <Link to="/wishlist">
+
+              <Button variant="primary" className="accbtn1" style={{
+                margin:"1rem"
+              }}>
+                  Your Wishlist
                 </Button>
-              <Button variant="primary" className="accbtn">
+
+              </Link>
+
+
+              <Button variant="primary" className="accbtn1" style={{
+                margin:"1rem",
+              }}>
                   Return & Refund
                 </Button>
+
+
               
-                <Button variant="primary" onClick={handleShow} className="accbtn">
+                <Button variant="primary" onClick={handleShow} className="accbtn1" style={{
+                  margin:"1rem",
+                }}>
                   Choose Theme
                 </Button>
 
@@ -140,7 +164,7 @@ class="toggler" style={{background:colors.primary}}></button>
       
       </Row>
 
-      <ThemeProvider
+      {/* <ThemeProvider
       theme={createTheme({
         breakpoints: {
           values: {
@@ -153,7 +177,7 @@ class="toggler" style={{background:colors.primary}}></button>
       })}
     >
      
-    </ThemeProvider>
+    </ThemeProvider> */}
 
 
     </Container>

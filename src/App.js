@@ -33,6 +33,7 @@ import colors from './App/Config/colors';
 import { Button, Nav } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import OrdersScreen from './App/Screens/OrdersScreen/OrdersScreen';
+import FavouritesScreen from './App/Screens/FavouritesScreen/FavouritesScreen';
 // const GlobalStyle = createGlobalStyle`
 //   body {
 //     background-image: ${colors.primary};
@@ -162,6 +163,16 @@ function App() {
     )
   }
 
+  const FavouritesScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <FavouritesScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
   return (
     <div style={{
       background: theme
@@ -180,6 +191,7 @@ function App() {
         <Route path="/checkout" element={<CheckoutScreenContainer/>} />
         <Route path="/account" element={<AccountScreenContainer/>} />
         <Route path="/orders" element={<OrdersScreenContainer/>} />
+        <Route path="/wishlist" element={<FavouritesScreenContainer/>} />
       </Routes>
 
 

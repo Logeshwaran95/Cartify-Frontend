@@ -1,34 +1,62 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import "./Navbar.css"
-import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: linear-gradient(to right, #e66465, #9198e5);
-  }
-`;
+
+// import { createGlobalStyle } from 'styled-components';
+
+// const GlobalStyle = createGlobalStyle`
+//   body {
+//     background: linear-gradient(to right, #e66465, #9198e5);
+//   }
+// `;
 
 function OffcanvasExample() {
+
+  const navRef = React.useRef(null);
+  const [navbarColor, setNavbarColor] = React.useState("transparent");
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (navRef.current) {
+        if (window.pageYOffset > navRef.current.offsetTop) {
+          setNavbarColor("white");
+        } else {
+          setNavbarColor("transparent");
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
   return (
     <>
     
       {[ 'lg'].map((expand) => (
         <Navbar key={expand} bg="transparent" expand={expand} className="mb-3"
         breakpoint={expand}
-        variant='dark'
+       
         fixed='top'
-        
+        // ref={navRef}
         id="navbar"
         style={{
-          borderBottomLeftRadius: '10px',
-          borderBottomRightRadius: '10px',
+          borderBottomLeftRadius: '20px',
+          borderBottomRightRadius: '20px',
+          // position:'sticky',
+          // top: '0',
+          // zIndex: '1',
+          // backgroundColor: navbarColor,
+          // transition: 'background-color 0.5s ease',
         }}
         
         
@@ -38,6 +66,7 @@ function OffcanvasExample() {
             <Navbar.Brand href="#"
             style={{
               fontSize: '1.5rem',
+              color: 'white',
             }}
             >
               {/* <img 

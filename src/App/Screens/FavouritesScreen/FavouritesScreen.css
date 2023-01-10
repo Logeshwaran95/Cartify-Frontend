@@ -1,7 +1,7 @@
 a{
     text-decoration: none;
 }
-#order_testimonials{
+#wish_testimonials{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,15 +10,15 @@ a{
 }
 
 
-.order_testimonial-box-container{
+.wish_testimonial-box-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     width:100%;
 }
-.order_testimonial-box{
-    width:475px;
+.wish_testimonial-box{
+    width:480px;
     box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
     /* background-color: #ffffff; */
     
@@ -41,7 +41,7 @@ a{
     
 }
 
-.order_testimonial-box::before{
+.wish_testimonial-box::before{
     content: "";
     position: absolute;
     background: inherit;
@@ -54,81 +54,80 @@ a{
     filter: blur(10px);
 }
 
-.order_profile-img{
+.wish_profile-img{
     width:50px;
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
 }
-.order_profile-img img{
+.wish_profile-img img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
-.order_profile{
+.wish_profile{
     display: flex;
     align-items: center;
 }
-.order_name-user{
+.wish_name-user{
     display: flex;
     flex-direction: column;
     
 }
-.order_name-user strong{
+.wish_name-user strong{
  
     color:white;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
 }
-.order_name-user span{
+.wish_name-user span{
     color: #d0cdcd;
     font-size: 0.8rem;
 }
-.order_reviews h6{
-    color: #ffffff;
-    font-weight: 700;
+.wish_reviews{
+    color: #f9d71c;
 }
-.order_box-top{
+.wish_box-top{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
-.order_client-comment p{
+.wish_client-comment p{
     font-size: 0.9rem;
     color:white;
 }
 
-.order_testimonial-box{
+.wish_testimonial-box{
     transition-duration: 0.4s;
 }
-.order_testimonial-box:hover{
+.wish_testimonial-box:hover{
     transform: scale(1.02);
     transition: all 0.3s ease;
 }
  
 @media(max-width:1060px){
-    .order_testimonial-box{
+    .wish_testimonial-box{
         width:45%;
         padding: 10px;
     }
 }
 @media(max-width:790px){
-    .order_testimonial-box{
+    .wish_testimonial-box{
         width:100%;
     }
-    .order_testimonial-heading h1{
+    .wish_testimonial-heading h1{
         font-size: 1.4rem;
     }
 }
 @media(max-width:340px){
-    .order_box-top{
+    .wish_box-top{
         flex-wrap: wrap;
         margin-bottom: 10px;
     }
-    .order_reviews{
+    .wish_reviews{
         margin-top: 10px;
     }
 }
