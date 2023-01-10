@@ -37,7 +37,7 @@ export default function Cart() {
     }}
     >
 
-      <Row lg={4} sm={3}
+      <Row lg={4} sm={3} md={3}
           style={{
             width:"100vw",
             overflow:"hidden",
@@ -55,11 +55,16 @@ export default function Cart() {
             className='cardimg'
             />
             <Card.Body>
-              <Card.Title>Asus Rog</Card.Title>
-              <Card.Text>
+              <Card.Title
+              style={{
+                textAlign:"center",
+                height:"1rem",
+              }}
+              >Asus Rog</Card.Title>
+              {/* <Card.Text>
                 Asus Rog is a  quick example text to build on the card title and make up the
                 bulk of the card's content.
-              </Card.Text>
+              </Card.Text> */}
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroup.Item>Quantity : 
@@ -99,7 +104,8 @@ export default function Cart() {
             </ListGroup>
             <Card.Body
             style={{
-              alignItems: 'center'
+              alignItems: 'center',
+              height:'65px'
             }}
             >
             <Button variant="danger"
@@ -131,7 +137,7 @@ export default function Cart() {
         textAlign: 'center',
         fontWeight:'800',
         letterSpacing: '1px',
-        margin:'1.5rem'
+        margin:'1.5rem',
       }}>Cart Summary</h2>
 
     <Container>
