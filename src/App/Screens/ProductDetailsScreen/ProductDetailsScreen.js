@@ -1,8 +1,10 @@
 import { borderRadius } from '@mui/system';
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { Link } from 'react-router-dom';
+import ReviewCard from '../../Components/ReviewCard/ReviewCard';
 import ProductScreen from '../ProductScreen/ProductScreen';
 
 import './ProductDetailsScreen.css';
@@ -28,10 +30,11 @@ export default function ProductDetailsScreen() {
 
   const [currImage, setCurrImage] = React.useState(images[0].original);
   const [quantity, setQuantity] = React.useState(1);
+  const [currTab,setCurrTab] = React.useState('Description');
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  })
+  // React.useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // })
 
   const items = ['item1','item2','item3'];
 
@@ -67,7 +70,8 @@ export default function ProductDetailsScreen() {
     style={{
         textAlign: 'center',
         color: 'white',
-        marginTop: '10px',
+        marginTop: '20px',
+        marginBottom: '20px',
     }}
     >${quantity*100}</h3>
 
@@ -143,7 +147,7 @@ export default function ProductDetailsScreen() {
     <br></br>
 
     <Tabs
-      defaultActiveKey="Description"
+      defaultActiveKey={currTab}
       id="justify-tab-example"
       className="myClass"
       justify
@@ -162,7 +166,8 @@ export default function ProductDetailsScreen() {
         </p>
 
       </Tab>
-      <Tab eventKey="Offers" title="Offers">
+      <Tab eventKey="Offers" title="Offers"
+      >
         <h2 
         className='title'
         >Offers</h2>
@@ -204,10 +209,35 @@ export default function ProductDetailsScreen() {
   </tbody>
 </table>
       </Tab>
-      <Tab eventKey="Reviews" title="Reviews">
-        <h2
+      <Tab eventKey="Reviews" title="Reviews"
+      onClick={() => setCurrTab('Reviews')}
+      >
+       
+       <div 
+       style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: "20px",
+        margin:"auto",
+        flexWrap: "wrap",
+       }}
+       >
+
+       <h2
         className='title'
         >Reviews</h2>
+      
+
+        <Link to='/product-id/reviews'>
+        <Button variant="primary"
+        >View All</Button>
+        </Link>
+
+       </div>
+      
+
+        
 
 <section id="testimonials">
  
@@ -217,45 +247,9 @@ export default function ProductDetailsScreen() {
    
    {items.map((item) => 
 
-     <div class="testimonial-box">
-       
-       <div class="box-top">
-          
-         
-           <div class="profile">
-            
-             
-               <div class="profile-img">
-                   <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
-               </div>
-             
-               <div class="name-user">
-                   <strong>Liam mendes</strong>
-                   <span>@liammendes</span>
-               </div>
-           </div>
-        
-           <div class="reviews">
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="far fa-star"></i>
-           </div>
-       </div>
+     <ReviewCard/>
 
-       <div class="client-comment">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-       </div>
-   </div>
-
-)}
-
-
-
- 
-   
-   
+)}   
   
      </div>
 </section>

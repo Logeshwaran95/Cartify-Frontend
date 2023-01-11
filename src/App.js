@@ -27,6 +27,7 @@ import CartScreen from "./App/Screens/CartScreen/CartScreen";
 import AccountScreen from "./App/Screens/AccountScreen/AccountScreen";
 import CheckoutScreen from './App/Screens/CheckoutScreen/CheckoutScreen';
 import SellerScreen from './App/Screens/SellerScreen/SellerScreen';
+import ReviewsScreen from './App/Screens/ReviewsScreen/ReviewsScreen';
 
 
 import colors from './App/Config/colors';
@@ -171,6 +172,16 @@ function App() {
     )
   }
 
+  const ReviewsScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <ReviewsScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
   return (
     <div style={{
       background: theme
@@ -190,6 +201,7 @@ function App() {
         <Route path="/account" element={<AccountScreenContainer/>} />
         <Route path="/orders" element={<OrdersScreenContainer/>} />
         <Route path="/wishlist" element={<FavouritesScreenContainer/>} />
+        <Route path="/product-id/reviews" element={<ReviewsScreenContainer/>} />
       </Routes>
 
 
