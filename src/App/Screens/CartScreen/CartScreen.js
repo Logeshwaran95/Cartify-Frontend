@@ -190,7 +190,7 @@ export default function Cart() {
       textAlign: 'center',
    }}
    >
-    <Link to="/checkout">
+    <Link to="/home/checkout">
       <Button variant="primary" >
         Checkout
       </Button>

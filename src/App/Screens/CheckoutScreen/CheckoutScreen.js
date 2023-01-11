@@ -33,7 +33,7 @@ export default function CheckoutScreen() {
           'Your Order has been Placed.',
           'success'
         ).then(()=> {
-          navigate("/");
+          navigate("/home");
         })
       }
       else{

@@ -50,7 +50,7 @@ export default class CenterMode extends Component {
           {items.map(
             (item) => 
           
-          <Link to="/product/id">
+          <Link to="/home/product/id">
           <div className="new">
           <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
           // className="imgcenter1"

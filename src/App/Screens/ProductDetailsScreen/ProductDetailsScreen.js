@@ -229,7 +229,7 @@ export default function ProductDetailsScreen() {
         >Reviews</h2>
       
 
-        <Link to='/product-id/reviews'>
+        <Link to='/home/product/id/reviews'>
         <Button variant="primary"
         >View All</Button>
         </Link>

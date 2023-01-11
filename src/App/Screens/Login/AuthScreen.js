@@ -7,9 +7,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Lock from '@mui/icons-material/Lock';
+import { useNavigate } from 'react-router-dom';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Swal from 'sweetalert2'; 
 
 import AOS from 'aos';
 
@@ -21,6 +23,18 @@ const Form = () => {
    //      duration : 2000
    //    });
    //  }, []);
+
+   const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'green',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true
+    })
     
 
    const [islogin, setIslogin] = useState(true);
@@ -67,6 +81,7 @@ const Form = () => {
          setIsHover3(false); 
    }
 
+   const navigate = useNavigate();
 
    const mystyle = {
       icon:{
@@ -92,24 +107,74 @@ const Form = () => {
 
          if(islogin){
             if(lemail !== '' && lpsswd !== ''){
-               console.log("successfully logged in ",lemail);
+
+               if(lemail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+                  console.log("successfully logged in ",lemail);
+                  navigate('/home',{
+                     replace:true
+                  });
+                  Toast.fire({
+                     icon: 'success',
+                     title: 'Welcome To Cartify',
+                     text: 'You have successfully logged in'
+                  })
+               }
+               else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Invalid Email',
+                    })
+               }
             }
             else{
-               alert("Please fill all the fields(on login)");
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: lemail===""?"Please enter your email":"Please enter your password",
+              })
             }
          }
          else{
             console.log("in signup");
             if(semail !== '' && spsswd !== '' && sconfirmpsswd !== ''){
+
+               if(!semail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+                  Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text:'Invalid Email'
+                  })
+                  return;
+               }  
+
                if(spsswd !== sconfirmpsswd){
-                  alert("Passwords do not match");
+                  Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text:'Password does not match'
+                  })
+                  return;
                }
                else{
-                  console.log("successfully signep up ",semail);
+                  console.log("successfully signed up ",semail);
+                  navigate('/home',
+                  {
+                     replace:true
+                  });
+                  Toast.fire({
+                     icon: 'success',
+                     title: 'Welcome To Cartify',
+                     text: 'You have successfully signed up'
+                  })
                }
             }
             else{
-               alert("Please fill all the fields(on signup)");
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: semail===""?"Please enter your email":spsswd===""?"Please enter your password":"Please confirm your password",
+                })
             }
          }
          

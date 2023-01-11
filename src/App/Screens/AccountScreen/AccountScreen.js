@@ -128,7 +128,7 @@ class="toggler" style={{background:colors.primary}}></button>
               >
 
 
-                <Link to="/orders">
+                <Link to="/home/orders">
 
               <Button variant="primary" className="accbtn1" style={{
                 margin:"1rem",
@@ -139,7 +139,7 @@ class="toggler" style={{background:colors.primary}}></button>
 
                 </Link>
 
-              <Link to="/wishlist">
+              <Link to="/home/wishlist">
 
               <Button variant="primary" className="accbtn1" style={{
                 margin:"1rem"

@@ -192,16 +192,16 @@ function App() {
 
       <Routes>
 
-        <Route path="/auth" element={<AuthScreen />} />
-        <Route path="/" element={<HomeContainer />} />
-        <Route path="/product/id" element={<ProductDetailsContainer />} />
-        <Route path="/cart" element={<CartScreenContainer />} />
-        <Route path="/seller" element={<SellerScreenContainer/>} />
-        <Route path="/checkout" element={<CheckoutScreenContainer/>} />
-        <Route path="/account" element={<AccountScreenContainer/>} />
-        <Route path="/orders" element={<OrdersScreenContainer/>} />
-        <Route path="/wishlist" element={<FavouritesScreenContainer/>} />
-        <Route path="/product-id/reviews" element={<ReviewsScreenContainer/>} />
+        <Route path="/" element={<AuthScreen />} />
+        <Route path="/home" element={<HomeContainer />} />
+        <Route path="/home/product/id" element={<ProductDetailsContainer />} />
+        <Route path="/home/cart" element={<CartScreenContainer />} />
+        <Route path="/home/seller" element={<SellerScreenContainer/>} />
+        <Route path="/home/checkout" element={<CheckoutScreenContainer/>} />
+        <Route path="/home/account" element={<AccountScreenContainer/>} />
+        <Route path="/home/orders" element={<OrdersScreenContainer/>} />
+        <Route path="/home/wishlist" element={<FavouritesScreenContainer/>} />
+        <Route path="/home/product/id/reviews" element={<ReviewsScreenContainer/>} />
       </Routes>
 
 

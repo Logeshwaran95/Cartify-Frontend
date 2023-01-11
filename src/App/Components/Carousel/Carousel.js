@@ -19,7 +19,7 @@ export default function CorouselComponent() {
       {images.map((image) => 
 
 <Carousel.Item>
-<Link to="product/id">
+<Link to="/home/product/id">
 <img
   className="d-block w-100 carousel-image"
   src={image}

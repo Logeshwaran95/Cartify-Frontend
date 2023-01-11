@@ -90,7 +90,7 @@ function OffcanvasExample() {
                 <Nav className="justify-content-center mr-auto flex-grow-1 pe-3">
                 <ul>
     <li class="myli"><a href="/" className="mya">
-      <Link to="/"
+      <Link to="/home"
       className="linkbtn"
       >home</Link>
       </a></li>
@@ -100,7 +100,7 @@ className="linkbtn"
       >Seller</Link>
       </a></li> */}
     <li class="myli"><a href="#" className="mya"> 
-    <Link to="/cart"
+    <Link to="/home/cart"
     className="linkbtn"
       >Cart</Link>
        </a></li>
@@ -110,7 +110,7 @@ className="linkbtn"
       >Notifications</Link>
       </a></li> */}
     <li class="myli"><a href="#" className="mya"> 
-    <Link to="/account"
+    <Link to="/home/account"
 className="linkbtn"
       >Account</Link>
        </a></li>

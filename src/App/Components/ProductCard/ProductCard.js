@@ -4,7 +4,7 @@ import './ProductCard.css';
 
 export default function ProductCard() {
   return (
-    <Link to="/product/id">
+    <Link to="/home/product/id">
     	<div class="product-card">
 		<div class="badge">Hot</div>
 		<div class="product-tumb">

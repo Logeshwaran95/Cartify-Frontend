@@ -40,7 +40,7 @@ const Pay = () => {
                         'Order Placed Successfully',
                         'success'
                       ).then(()=> {
-                        navigate("/");
+                        navigate("/home");
                       })
                 }
                 else{
