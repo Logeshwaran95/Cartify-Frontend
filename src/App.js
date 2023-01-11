@@ -132,12 +132,10 @@ function App() {
       <div>
         <Navbar/>
 
-       
-
-
         <AccountScreen
           setTheme={setTheme}
         />
+        
         <Footer/>
       </div>
     )

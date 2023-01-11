@@ -9,10 +9,10 @@ export default function Footer() {
      <div class="left box">
        <div class="upper">
          <div class="topic"
-         data-aos="fade-right"
+        //  data-aos="fade-right"
          >About us</div>
          <p
-         data-aos="fade-left"
+        //  data-aos="fade-left"
          >
             Cartify is an e-commerce website 
          </p>

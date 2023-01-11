@@ -1,10 +1,10 @@
-import { HandymanOutlined } from '@mui/icons-material';
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Link,useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import "./CheckoutScreen.css";
 
 import Payment from "../Payment";
 
@@ -21,7 +21,7 @@ export default function CheckoutScreen() {
     Swal.fire({
       title: 'Are you sure you want to proceed?',
       text: "Cash on Delivery !",
-      icon: 'warning',
+      icon: 'info',
       showCancelButton: true,
       confirmButtonColor: 'btn-success',
       cancelButtonColor: '#d33',
@@ -51,6 +51,15 @@ export default function CheckoutScreen() {
     <div>
 
         <Container>
+
+        <h2 style={{
+          textAlign: 'center',
+          margin: '2rem',
+          fontWeight: '600',
+          color:'white',
+          letterSpacing:'2px'
+
+        }}>Checkout</h2>
 
 <table>
   <thead>
@@ -107,7 +116,7 @@ export default function CheckoutScreen() {
       md={1}
       >
         <Col>
-            <h2 className='title'>Delivery Details</h2>
+            <h2 className='checkout_title'>Delivery Details</h2>
 
             <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -168,8 +177,10 @@ export default function CheckoutScreen() {
 
         </Col>
         
-        <Col>
-            <h2 className='title'>Payment Details</h2>
+        <Col >
+            <h2 className='checkout_title'
+            
+            >Payment Details</h2>
 
             <Tabs
       defaultActiveKey="cod"
