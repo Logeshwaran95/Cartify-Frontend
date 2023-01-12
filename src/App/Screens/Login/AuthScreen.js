@@ -1,7 +1,7 @@
 import React, {  useEffect,useState } from 'react';
 import styles from './Auth.module.css';
 
-import { FaFacebookF,FaInstagram,FaTwitter,FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF,FaInstagram,FaTwitter,FaLinkedinIn,FaGithub } from 'react-icons/fa';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -14,15 +14,17 @@ import Tabs from 'react-bootstrap/Tabs';
 import Swal from 'sweetalert2'; 
 
 import AOS from 'aos';
+import axios from 'axios';
 
 
 const Form = () => {
 
-   // useEffect(() => {
-   //    AOS.init({
-   //      duration : 2000
-   //    });
-   //  }, []);
+   useEffect(() => {
+
+      if(localStorage.getItem('currentUser')){
+         navigate('/home');
+      }
+    }, []);
 
    const Toast = Swal.mixin({
       toast: true,
@@ -42,9 +44,11 @@ const Form = () => {
    const [semail, setSemail] = useState('');
    const [spsswd, setSpsswd] = useState('');
    const [sconfirmpsswd, setSconfirmpsswd] = useState('');
+   const [susername, setSusername] = useState('');
    
    const [lemail, setLemail] = useState('');
    const [lpsswd, setLpsswd] = useState('');
+   
 
   
 
@@ -109,15 +113,39 @@ const Form = () => {
             if(lemail !== '' && lpsswd !== ''){
 
                if(lemail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
-                  console.log("successfully logged in ",lemail);
-                  navigate('/home',{
-                     replace:true
-                  });
-                  Toast.fire({
-                     icon: 'success',
-                     title: 'Welcome To Cartify',
-                     text: 'You have successfully logged in'
+                  
+                  axios.post('http://localhost:4000/auth/login', {
+                     email: lemail,
+                     password: lpsswd
+                  }).then((response) => {
+                     console.log(response);
+                     const myobj = {
+                        userId:response.data._id,
+                        email:response.data.email,
+                        username:response.data.username,
+                        token:response.data.accessToken
+                     }
+                     localStorage.setItem(`cartifyUser_${response.data.username}`,JSON.stringify(myobj));
+                     localStorage.setItem('currentUser',response.data.username);
+                     console.log("successfully logged in ",lemail);
+                     navigate('/home',{
+                        replace:true
+                     });
+                     Toast.fire({
+                        icon: 'success',
+                        title: `Welcome To Cartify ${response.data.username}`,
+                        text: 'You have successfully logged in'
+                     })
+                  }).catch((error) => {
+                     console.log(error);
+                     Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Invalid Email or Password or User does not exist',
+                    })
                   })
+
+                   
                }
                else{
                     Swal.fire({
@@ -157,15 +185,37 @@ const Form = () => {
                   return;
                }
                else{
-                  console.log("successfully signed up ",semail);
-                  navigate('/home',
-                  {
-                     replace:true
-                  });
-                  Toast.fire({
-                     icon: 'success',
-                     title: 'Welcome To Cartify',
-                     text: 'You have successfully signed up'
+                  axios.post('http://localhost:4000/auth/register', {
+                     username:susername,
+                     email: semail,
+                     password: spsswd
+                  }).then((response) => {
+                     console.log(response);
+                     console.log("successfully signed up ",semail);
+                     
+                     // navigate('/',{
+                     //    replace:true
+                     // });
+                    
+
+                     Toast.fire({
+                        icon: 'success',
+                        title: 'You have successfully signed up',
+                        text: 'Now Login to continue'
+                     })
+
+                     setTimeout(() => {
+                        window.location.reload();
+                     },3000)
+                     
+                  })
+                  .catch((error) => {
+                     
+                     Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'User already exists',
+                     })
                   })
                }
             }
@@ -186,6 +236,7 @@ const Form = () => {
 
    return (
       <div className={styles.container}>
+         
          <div className={styles.text}>
             <h2 style={{fontSize:"3rem",fontWeight:800,color:"white"}}
             data-aos="zoom-out-down"
@@ -198,10 +249,31 @@ const Form = () => {
             // data-aos-anchor-placement="bottom-center"
             >
                <ul className={styles.social_menu_ul}>
+
+               <li className={styles.social_menu_ul_li}
+                      >
+                     <a href="https://github.com/Logeshwaran95" target="blank" className={styles.social_menu_ul_li_a}>
+                        <FaGithub style={hover1?mystyle.icon1:mystyle.icon}
+                        onMouseEnter={handleMouseEnter1}
+                        onMouseLeave={handleMouseLeave1}
+                        ></FaGithub>
+                     </a>
+                  </li>
+
+                  <li className={styles.social_menu_ul_li}>
+                     <a href="https://www.linkedin.com/in/logeshwaran-/" target="blank" className={styles.social_menu_ul_li_a}>
+                        <FaLinkedinIn style={hover3?mystyle.icon1:mystyle.icon}
+                        onMouseEnter={handleMouseEnter3}
+                        onMouseLeave={handleMouseLeave3}
+                        ></FaLinkedinIn>
+                     </a>
+                  </li>
+
+
                   <li className={styles.social_menu_ul_li}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}>
-                     <a href="https://www.instagram.com/ceg_tech_forum/" target="blank" className={styles.social_menu_ul_li_a}>
+                     <a href="https://www.instagram.com/logeshsiva95/" target="blank" className={styles.social_menu_ul_li_a}>
                         
                            <FaInstagram 
                            id="insta" style={hover?mystyle.icon1:mystyle.icon}
@@ -211,29 +283,13 @@ const Form = () => {
                      
                      </a>
                   </li>
-                  <li className={styles.social_menu_ul_li}
-                      >
-                     <a href="https://www.facebook.com/techforum.ceg/" target="blank" className={styles.social_menu_ul_li_a}>
-                        <FaFacebookF style={hover1?mystyle.icon1:mystyle.icon}
-                        onMouseEnter={handleMouseEnter1}
-                        onMouseLeave={handleMouseLeave1}
-                        ></FaFacebookF>
-                     </a>
-                  </li>
+
                   <li className={styles.social_menu_ul_li}>
-                     <a href="https://twitter.com/ceg_tech_forum/" target="blank" className={styles.social_menu_ul_li_a}>
+                     <a href="https://twitter.com/Logeshwaran395" target="blank" className={styles.social_menu_ul_li_a}>
                         <FaTwitter style={hover2?mystyle.icon1:mystyle.icon}
                         onMouseEnter={handleMouseEnter2}
                         onMouseLeave={handleMouseLeave2}
                         ></FaTwitter>
-                     </a>
-                  </li>
-                  <li className={styles.social_menu_ul_li}>
-                     <a href="https://www.linkedin.com/company/ceg-tech-forum/" target="blank" className={styles.social_menu_ul_li_a}>
-                        <FaLinkedinIn style={hover3?mystyle.icon1:mystyle.icon}
-                        onMouseEnter={handleMouseEnter3}
-                        onMouseLeave={handleMouseLeave3}
-                        ></FaLinkedinIn>
                      </a>
                   </li>
                </ul>
@@ -325,10 +381,25 @@ const Form = () => {
       <Tab eventKey="profile" title="SignUp">
    
       <div className={styles.container1}>
-                  <br></br>
+                  {/* <br></br>
                   <h2 style={{fontSize:"2rem",fontWeight:800,color:"white",marginLeft:"30%"}}>{
                      "SignUp"
-                  }</h2>
+                  }</h2> */}
+                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
+               <AccountCircle sx={{ color: 'white', mr: 1, my: 0.5 }} />
+               <TextField id="input-with-sx" label="Username" variant="standard"
+               color="secondary"
+               style={{
+                     width: "15rem",
+               }}
+               onChange={(e) => {
+                  setSusername(e.target.value);
+               }}
+            />
+            </Box>
+            
+
+               <br></br>
             
            
                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -376,10 +447,10 @@ const Form = () => {
                   }}
                />
              </Box>
-        
-            
+                  
+            <br></br>
 
-               <br></br>
+         
             
 
                

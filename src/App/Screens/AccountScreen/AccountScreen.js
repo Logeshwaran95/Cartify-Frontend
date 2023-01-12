@@ -4,12 +4,74 @@ import "./AccountScreen.css"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import colors from '../../Config/colors';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 export default function Account({setTheme}) {
+
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'green',
+    customClass: {
+      popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true
+  })
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    // console.log(user);
+    axios.get(`http://localhost:4000/user/find/${user.userId}`, {
+      headers: {
+        'authorization': `bearer ${user.token}`
+      }
+    }).then(res => {
+      console.log(res.data);
+      setUsername(res.data.username);
+      setEmail(res.data.email);
+    }).catch(err => {
+      console.log(err);
+    })
+  }, []);
+
+  const handleLogout = () => {
+
+    Swal.fire({
+      title: 'Logout of Cartify ?',
+      text: "Confirm!",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: 'btn-success',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Proceed!'
+    }).then((result) => {
+        if(result.isConfirmed){
+          const currentUser = localStorage.getItem('currentUser');
+      localStorage.removeItem(`cartifyUser_${currentUser}`);
+      localStorage.removeItem('currentUser');
+      navigate('/');
+      Toast.fire({
+        icon: 'success',
+        title: 'Cartify Misses You',
+        text: 'Logged Out Successfully' 
+     })
+        }
+    })
+  }
 
 
   const [show, setShow] = useState(false);
@@ -98,8 +160,8 @@ class="toggler" style={{background:colors.primary}}></button>
           </div>
 
           <div>
-          <h3 className="accname">John Doe</h3>
-          <p className="accemail">hello@gmail.com</p>
+          <h3 className="accname">{username}</h3>
+          <p className="accemail">{email}</p>
           <Button variant="primary" className="accbtn">
                   Edit Profile
                 </Button>
@@ -162,6 +224,12 @@ class="toggler" style={{background:colors.primary}}></button>
                   margin:"1rem",
                 }}>
                   Choose Theme
+                </Button>
+
+                <Button variant="primary" onClick={handleLogout} className="accbtn1" style={{
+                  margin:"1rem",
+                }}>
+                  Logout
                 </Button>
 
 
