@@ -18,6 +18,7 @@ export default function Account({setTheme}) {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [user, setUser] = useState({});
 
   const Toast = Swal.mixin({
     toast: true,
@@ -34,6 +35,7 @@ export default function Account({setTheme}) {
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    setUser(user);
     // console.log(user);
     axios.get(`http://localhost:4000/user/find/${user.userId}`, {
       headers: {
@@ -101,31 +103,31 @@ export default function Account({setTheme}) {
 
 <button onClick={() => {
   setTheme(colors.primary);
-  localStorage.setItem('CartifyTheme', colors.primary);
+  localStorage.setItem(`CartifyTheme`, colors.primary);
 }}
 class="toggler" style={{background:colors.primary}}></button>
 <button onClick={() => {
   setTheme("linear-gradient(to right, #f2709c, #ff9472)");
-  localStorage.setItem('CartifyTheme', 'linear-gradient(to right, #f2709c, #ff9472)');
+  localStorage.setItem(`CartifyTheme`, 'linear-gradient(to right, #f2709c, #ff9472)');
 }} class="toggler" style={{background:"linear-gradient(to right, #f2709c, #ff9472)"}}></button>
 
 
 <button onClick={() => {
   setTheme("linear-gradient(to right, #485563, #29323c)");
-  localStorage.setItem('CartifyTheme', 'linear-gradient(to right, #485563, #29323c)');
+  localStorage.setItem(`CartifyTheme`, 'linear-gradient(to right, #485563, #29323c)');
 }} class="toggler" style={{background:"linear-gradient(to right, #485563, #29323c)"}}></button>
 
 
 
 <button onClick={() => {
   setTheme("linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )");
-  localStorage.setItem('CartifyTheme', 'linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )');
+  localStorage.setItem(`CartifyTheme`, 'linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )');
 }} class="toggler" style={{background:"linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )"}}></button>
 
 
 <button onClick={() => {
   setTheme("linear-gradient(to right, #5c258d, #4389a2)");
-  localStorage.setItem('CartifyTheme', 'linear-gradient(to right, #5c258d, #4389a2)');
+  localStorage.setItem(`CartifyTheme`, 'linear-gradient(to right, #5c258d, #4389a2)');
 }} class="toggler" style={{background:"linear-gradient(to right, #5c258d, #4389a2)"}}></button>
 
 

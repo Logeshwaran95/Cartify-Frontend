@@ -3,8 +3,11 @@ import Slider from "react-slick";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import "./ProductScreen.css";
 
-export default class Responsive extends Component {
-  render() {
+ const ProductScreen = (props) => {
+
+    const products = props.data;
+  
+
     var settings = {
       dots: false,
       infinite: true,
@@ -38,35 +41,39 @@ export default class Responsive extends Component {
           }
         }
       ]
-    };
+    }
+    
     return (
       <div className="pscreen">
         <Slider {...settings}>
-          <div>
-            <ProductCard/>
-          </div>
-          <div>
-            <ProductCard/>    
-          </div>
-          <div>
-            <ProductCard/>
-          </div>
-          <div>
-            <ProductCard/>    
-          </div>  <div>
-            <ProductCard/>
-          </div>
-          <div>
-            <ProductCard/>    
-          </div>  <div>
-            <ProductCard/>
-          </div>
-          <div>
-            <ProductCard/>    
-          </div>
+
+        {products && products.map((product) => 
+                      <div>
+                      <ProductCard
+                      data={product}
+                      />
+                    </div>
+          )}
+           {products && products.map((product) => 
+                      <div>
+                      <ProductCard
+                      data={product}
+                      />
+                    </div>
+          )}
+           {products && products.map((product) => 
+                      <div>
+                      <ProductCard
+                      data={product}
+                      />
+                    </div>
+          )}
+          
+      
           
         </Slider>
       </div>
     );
   }
-}
+
+export default ProductScreen;

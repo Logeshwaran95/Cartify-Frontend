@@ -6,8 +6,13 @@ import Tabs from 'react-bootstrap/Tabs';
 import { Link } from 'react-router-dom';
 import ReviewCard from '../../Components/ReviewCard/ReviewCard';
 import ProductScreen from '../ProductScreen/ProductScreen';
+import { useLocation } from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal';
+import ImageGallery from '../../Components/ImageGallery/ImageGallery';
 
 import './ProductDetailsScreen.css';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const images = [
   {
@@ -28,34 +33,175 @@ const images = [
 
 export default function ProductDetailsScreen() {
 
-  const [currImage, setCurrImage] = React.useState(images[0].original);
+  const location = useLocation();
+  const { product } = location.state;
+
+  const [currImage, setCurrImage] = React.useState(product && product.image);
   const [quantity, setQuantity] = React.useState(1);
   const [currTab,setCurrTab] = React.useState('Description');
+
+  const [show, setShow] = React.useState(false);
+
+  function handleShow() {
+    setShow(true);
+  }
+
+
 
   // React.useEffect(() => {
   //   window.scrollTo(0, 0);
   // })
 
+
   const items = ['item1','item2','item3'];
+
+  const handleAddToCart = async (product) => {
+
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    const checkCartExist =  localStorage.getItem(`CartifyCart_${currentUser}`);
+    console.log("here is token",user.token);
+
+    console.log("here is product",product);
+    
+
+    if(!checkCartExist) {
+
+      const myobj = {
+
+        userId: user.userId,
+        products: {
+          productId: product._id,
+          title: product.title,
+          image: product.image,
+          quantity: quantity,
+          price: product.currentPrice,
+          total: product.currentPrice * quantity
+        }
+      }
+
+      console.log("myobj",myobj);
+
+      try{
+
+        const response = await axios.post("http://localhost:4000/cart/",
+        myobj
+        ,{
+          headers: {
+            Authorization: `bearer ${user.token}`
+          }
+        }
+        
+        )
+
+        
+        localStorage.setItem(`CartifyCart_${currentUser}`, "true");
+        console.log(response);
+        Swal.fire({
+          title: `${product.title} Added to cart`,
+          text: 'You can check your cart to proceed to checkout',
+          icon: 'success',
+        })
+
+      }
+      catch(err){
+        console.log(err);
+      }
+        
+
+
+
+
+    }
+    else{
+        try{
+
+          const myobj = {
+              products:[
+                {
+                  productId: product._id,
+                  title: product.title,
+                  image: product.image,
+                  quantity: quantity,
+                  price: product.currentPrice,
+                  total: product.currentPrice * quantity
+                }
+              ]
+          }
+            
+          const response = await axios.put(`http://localhost:4000/cart/${user.userId}`,
+          myobj
+          ,{
+            headers: {
+              Authorization: `bearer ${user.token}`
+            }
+          }
+          
+          )
+          Swal.fire({
+            title: `${product.title} Added to cart`,
+            text: 'You can check your cart to proceed to checkout',
+            icon: 'success',
+          })
+            console.log(response);
+
+        }
+        catch(err){
+            console.log("it is error",err);
+            Swal.fire({
+              title: 'Error',
+              text: err.response.data,
+              icon: 'error',
+            })
+            
+        }
+    }
+
+  }
 
   return (
 
+    <>
+
+    {product &&
+
+    
     <div>
+
+<Modal show={show} fullscreen onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{product.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ImageGallery
+          images={product.gallery}
+          />
+        </Modal.Body>
+      </Modal>
+
+
+
 
         <Container className="container1">
       <Row>
         <Col lg>
         <div className='left1'>
-          <h2>Nike Air Max</h2>
+          <h2>{product.title}</h2>
           <p>
-          Change the underlying component CSS base class name and modifier class names prefix. This is an escape hatch for working with heavily customized bootstrap css.
+            {product.shortDescription}
           </p>
           <div className='imgchoicegrp'>
-            {images.map((image, index) => (
-                   <img src={image.original} className='imgchoice'
-                   onClick={() => setCurrImage(image.original)}
+
+            {/* map only first three images */}
+        
+
+            {product.gallery.slice(0,3).map((image) => (
+                   <img src={image} className='imgchoice'
+                   onClick={() => setCurrImage(image)}
                    />
             ))}
+
+            
         
           </div>
        </div>
@@ -65,7 +211,9 @@ export default function ProductDetailsScreen() {
 
 <div className='centerImg'>
     <img
-    src={currImage} />
+    src={currImage}
+    onClick={() => handleShow()}
+    />
     <h3 
     style={{
         textAlign: 'center',
@@ -73,7 +221,7 @@ export default function ProductDetailsScreen() {
         marginTop: '20px',
         marginBottom: '20px',
     }}
-    >${quantity*100}</h3>
+    >${product.price*quantity}</h3>
 
     <div className="quantity">
     <button className="minus-btn" type="button" name="button"
@@ -111,15 +259,18 @@ export default function ProductDetailsScreen() {
             style={{
               color:"yellow",
             }}
-            > 4.5</span>
+            > {product.rating}</span>
              </h2>
           <p>1234 ratings</p>
           <div class="reviews">
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="far fa-star"></i>
+              {product.rating >= 1 ? 
+              
+              Array.from({length: product.rating}, () =>
+              <i class="fas fa-star"></i>) :
+              
+              
+              <i class="far fa-star"></i>}
+
            </div>
 
           <div className='sizegrp'>
@@ -136,7 +287,9 @@ export default function ProductDetailsScreen() {
             <button className='colorbtn yellow'></button>
           </div>
 
-            <button className='addtocartbtn'>Add to Cart</button>
+            <button className='addtocartbtn'
+            onClick={() => handleAddToCart(product)}
+            >Add to Cart</button>
         
 
         </div>
@@ -162,7 +315,7 @@ export default function ProductDetailsScreen() {
         >Description</h2>
 
         <p className='desc'>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
+        {product.description}
         </p>
 
       </Tab>
@@ -184,8 +337,8 @@ export default function ProductDetailsScreen() {
   <tbody>
     <tr>
       <td data-label="Account">Visa - 3412</td>
-      <td data-label="Due Date">04/01/2016</td>
-      <td data-label="Amount">$1,190</td>
+      <td data-label="Validity">04/01/2016</td>
+      <td data-label="Discount">$1,190</td>
       <td data-label="Period">03/01/2016 - 03/31/2016</td>
     </tr>
     <tr>
@@ -264,6 +417,10 @@ export default function ProductDetailsScreen() {
      <ProductScreen/>
 
     </div>
+
+}
+
+    </>
     
  
   )

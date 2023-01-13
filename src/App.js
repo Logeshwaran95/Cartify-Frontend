@@ -35,6 +35,7 @@ import { Button, Nav } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import OrdersScreen from './App/Screens/OrdersScreen/OrdersScreen';
 import FavouritesScreen from './App/Screens/FavouritesScreen/FavouritesScreen';
+import HomeScreen from './App/Screens/HomeScreen/HomeScreen';
 // const GlobalStyle = createGlobalStyle`
 //   body {
 //     background-image: ${colors.primary};
@@ -66,33 +67,7 @@ function App() {
     return (
       <div>
         <Navbar />
-
-       
-
-        <h2
-        className='titleText'
-        >Now On the Air</h2>
-
-        <CarouselComp/>
-
-        <h2
-        className='titleText'
-        >Prime Deals</h2>
-
-        <ProductScreen/>
-
-        <h2
-        className='titleText'
-        >Trending</h2>
-
-        <ProductScreen/>
-
-        <h2
-        className='titleText'
-        >Offers</h2>
-
-        <CorouselCenter />
-        
+        <HomeScreen/>
         <Footer />
       </div>
     )
@@ -194,7 +169,7 @@ function App() {
 
         <Route path="/" element={<AuthScreen />} />
         <Route path="/home" element={<HomeContainer />} />
-        <Route path="/home/product/id" element={<ProductDetailsContainer />} />
+        <Route path="/home/product" element={<ProductDetailsContainer />} />
         <Route path="/home/cart" element={<CartScreenContainer />} />
         <Route path="/home/seller" element={<SellerScreenContainer/>} />
         <Route path="/home/checkout" element={<CheckoutScreenContainer/>} />

@@ -15,8 +15,15 @@
     
 }
 .cardimg{
-    height:50%;
-    width:100%;
+    height:auto;
+    width:50%;
+    object-fit: cover;
+    align-self: center;
+
+
+    /* min-height: 180px; */
+
+
 }
 .quantity{
     display: flex;

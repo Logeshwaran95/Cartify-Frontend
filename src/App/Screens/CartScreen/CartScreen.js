@@ -9,17 +9,89 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { ShowChart } from '@mui/icons-material';
 
 export default function Cart() {
 
   const [quantity, setQuantity] = React.useState(1);
   const [total, setTotal] = React.useState(1);
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  })
+  const [cartitems, setCartItems] = React.useState([]);
+  const [user, setUser] = React.useState({});
 
-  const items = ['item1', 'item2', 'item3', 'item4', 'item5']
+
+
+
+
+  const getCartItems = async () => {
+    console.log("user",user);
+    try{
+      const response = await axios.get(`http://localhost:4000/cart/find/${user && user.userId}`,{
+        headers: {
+          'Authorization': `bearer ${user.token}`
+        }
+      });
+      console.log("here is cartitems",response.data[0].products);
+      setCartItems(response.data[0].products);
+    }
+    catch(err){
+      console.log("in error");
+      console.log(err.response.data);
+    }
+  }
+
+  const handleRemove = async (id) => {
+
+    // console.log("id",id);
+
+    try{
+
+      // const myObj = {
+      //   productId: id
+      // }
+      console.log("user id-->",user.userId,"usertoken --->",user.token);
+      
+      const response = await axios.delete(`http://localhost:4000/cart/${user && user.userId}`,
+       
+        {
+          headers: {
+            Authorization: `bearer ${user.token}`
+          },
+          data: {
+            productId: id
+          }
+        }
+
+        
+      )
+
+      console.log(response.data);
+      Swal.fire({
+        title: 'Success',
+        text: response.data,
+        icon: 'success',
+      })
+
+      getCartItems();
+
+    }
+    catch(err){
+      console.log(err);
+    }
+    }
+
+
+  React.useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    const data = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    setUser(data);
+    // console.log(user);
+    getCartItems();
+
+  },[user.userId])
+
 
   return (
     <div>
@@ -44,14 +116,18 @@ export default function Cart() {
           }}>
 
         
-          {items.map(
-            () => 
+          {
+
+            cartitems &&
+         
+          cartitems.map(
+            (product) => 
               <Col style={{
                 margin:"1rem",
               }}>
                   
             <Card className='ordercard'>
-            <Card.Img variant="top" src="https://www.finetoshine.com/wp-content/uploads/2020/04/Beautiful-Girl-Wallpapers-New-Photos-Images-Pictures.jpg" 
+            <Card.Img variant="top" src={product.image} 
             className='cardimg'
             />
             <Card.Body>
@@ -59,8 +135,10 @@ export default function Cart() {
               style={{
                 textAlign:"center",
                 height:"1rem",
+                fontSize:"1rem",
+                fontWeight:"600",
               }}
-              >Asus Rog</Card.Title>
+              >{product.title}</Card.Title>
               {/* <Card.Text>
                 Asus Rog is a  quick example text to build on the card title and make up the
                 bulk of the card's content.
@@ -96,9 +174,9 @@ export default function Cart() {
       
       
                  </ListGroup.Item>
-              <ListGroup.Item>Price : 1</ListGroup.Item>
+              <ListGroup.Item>Price : {product.price}</ListGroup.Item>
               <ListGroup.Item>Total :   
-                   { total}
+                   { product.total}
                 
                  </ListGroup.Item>
             </ListGroup>
@@ -112,12 +190,18 @@ export default function Cart() {
             style={{
               float: 'right',
             }}
+            onClick={() => {
+              handleRemove(product.productId);
+            }}
             >Remove</Button>
             </Card.Body>
           </Card>
               </Col>
             
-          )}
+          )
+   
+      
+        }
         
        
 
