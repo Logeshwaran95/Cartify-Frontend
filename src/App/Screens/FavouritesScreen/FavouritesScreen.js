@@ -5,6 +5,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
 
+import path from '../../Config/servAddr';
 
 
 export default function FavouritesScreen() {
@@ -18,7 +19,7 @@ export default function FavouritesScreen() {
         try{
             console.log("user id-->",user.userId,"usertoken --->",user.token);
       
-      const response = await axios.delete(`http://localhost:4000/wishlist`,
+      const response = await axios.delete(`${path.local}/wishlist`,
        
         {
           headers: {
@@ -53,7 +54,7 @@ export default function FavouritesScreen() {
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
 
         try{
-            const response = await axios.get(`http://localhost:4000/wishlist/find/${user && user.userId}`,{
+            const response = await axios.get(`${path.local}/wishlist/find/${user && user.userId}`,{
                 headers: {
                     Authorization: `bearer ${user.token}`
                 }
@@ -91,6 +92,28 @@ export default function FavouritesScreen() {
 
          
  <div class="wish_testimonial-box-container">
+
+ {
+        wishlists.length === 0 && 
+        <div
+        style={{
+          textAlign: 'center',
+          marginTop: '2rem',
+          color: 'white',
+          fontSize: '1.5rem',
+          fontWeight: '600'
+        }}
+        >
+          <h3
+          >Your Wishlist is Empty</h3>
+          <Link to='/home'>
+          <Button variant="primary" style={{
+            marginTop: '1rem'
+          }}>Go to Home</Button>
+          </Link>
+        </div>
+
+      }
 
         {
         wishlists &&

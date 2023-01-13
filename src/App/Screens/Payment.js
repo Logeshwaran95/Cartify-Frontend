@@ -3,7 +3,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import { useNavigate } from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 import Swal from 'sweetalert2'
-
+import path from '../Config/servAddr';
 import axios from 'axios';
 
 const publishableKey = "pk_test_51MC0sLSIzxR7tKXjzzP1ruys1HMpmFnJrkEVJNqLymU97jJ7FUuDtORTZKwGkcknqbQsVkZhrix3TTDwwuuYE0Lk00nxaqbEgR";
@@ -30,7 +30,7 @@ const Pay = () => {
                     tokenId:stripeToken.id,
                     amount:1000
                 })
-                const response = await axios.post('http://localhost:4000/checkout/payment',data,
+                const response = await axios.post(`${path}/checkout/payment`,data,
                 {headers:{"Content-Type" : "application/json"}}
                 );
                 console.log(response.data);

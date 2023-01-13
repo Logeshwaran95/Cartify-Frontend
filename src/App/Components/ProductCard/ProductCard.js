@@ -4,11 +4,12 @@ import './ProductCard.css';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import path from '../../Config/servAddr';
 
 export default function ProductCard(props) {
 
 	const product = props.data;
-	const path = `/home/product/${product._id}`
+	
 
 
 	const handleAddToWishlist = async (product) => {
@@ -37,7 +38,7 @@ export default function ProductCard(props) {
 	
 		  try{
 	
-			const response = await axios.post("http://localhost:4000/wishlist/",
+			const response = await axios.post(`${path.local}/wishlist/`,
 			myobj
 			,{
 			  headers: {
@@ -81,7 +82,7 @@ export default function ProductCard(props) {
 				  ]
 			  }
 				
-			  const response = await axios.put(`http://localhost:4000/wishlist/${user && user.userId}`,
+			  const response = await axios.put(`${path.local}/wishlist/${user && user.userId}`,
 			  myobj
 			  ,{
 				headers: {
@@ -141,7 +142,7 @@ export default function ProductCard(props) {
 	
 		  try{
 	
-			const response = await axios.post("http://localhost:4000/cart/",
+			const response = await axios.post(`${path.local}/cart/`,
 			myobj
 			,{
 			  headers: {
@@ -187,7 +188,7 @@ export default function ProductCard(props) {
 				  ]
 			  }
 				
-			  const response = await axios.put(`http://localhost:4000/cart/${user.userId}`,
+			  const response = await axios.put(`${path.local}/cart/${user.userId}`,
 			  myobj
 			  ,{
 				headers: {

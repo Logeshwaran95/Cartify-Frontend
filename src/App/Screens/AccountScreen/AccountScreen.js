@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+import path from '../../Config/servAddr';
 
 export default function Account({setTheme}) {
 
@@ -37,7 +38,7 @@ export default function Account({setTheme}) {
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
     setUser(user);
     // console.log(user);
-    axios.get(`http://localhost:4000/user/find/${user.userId}`, {
+    axios.get(`${path.local}/user/find/${user.userId}`, {
       headers: {
         'authorization': `bearer ${user.token}`
       }
@@ -198,7 +199,7 @@ class="toggler" style={{background:colors.primary}}></button>
                 margin:"1rem",
               }}
               >
-                  Your Orders
+                  My Orders
                 </Button>
 
                 </Link>
@@ -208,7 +209,7 @@ class="toggler" style={{background:colors.primary}}></button>
               <Button variant="primary" className="accbtn1" style={{
                 margin:"1rem"
               }}>
-                  Your Wishlist
+                 My Wishlist
                 </Button>
 
               </Link>

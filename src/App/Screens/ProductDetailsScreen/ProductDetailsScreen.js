@@ -14,20 +14,9 @@ import './ProductDetailsScreen.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-const images = [
-  {
-    original: 'https://picsum.photos/id/1018/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1018/250/150/',
-  },
-  {
-    original: 'https://picsum.photos/id/1015/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1015/250/150/',
-  },
-  {
-    original: 'https://picsum.photos/id/1019/1000/600/',
-    thumbnail: 'https://picsum.photos/id/1019/250/150/',
-  },
-];
+import path from '../../Config/servAddr';
+
+
 
 
 
@@ -84,7 +73,7 @@ export default function ProductDetailsScreen() {
 
       try{
 
-        const response = await axios.post("http://localhost:4000/cart/",
+        const response = await axios.post(`${path.local}/cart/`,
         myobj
         ,{
           headers: {
@@ -129,7 +118,7 @@ export default function ProductDetailsScreen() {
               ]
           }
             
-          const response = await axios.put(`http://localhost:4000/cart/${user.userId}`,
+          const response = await axios.put(`${path.local}/cart/${user.userId}`,
           myobj
           ,{
             headers: {

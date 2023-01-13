@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import AOS from 'aos';
 import axios from 'axios';
 
+import path from '../../Config/servAddr';
 
 const Form = () => {
 
@@ -114,7 +115,7 @@ const Form = () => {
 
                if(lemail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
                   
-                  axios.post('http://localhost:4000/auth/login', {
+                  axios.post(`${path.local}/auth/login`, {
                      email: lemail,
                      password: lpsswd
                   }).then((response) => {
@@ -185,7 +186,7 @@ const Form = () => {
                   return;
                }
                else{
-                  axios.post('http://localhost:4000/auth/register', {
+                  axios.post(`${path.local}/auth/register`, {
                      username:susername,
                      email: semail,
                      password: spsswd

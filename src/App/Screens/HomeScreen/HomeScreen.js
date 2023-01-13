@@ -5,6 +5,7 @@ import CarouselComp from '../../Components/Carousel/Carousel';
 import ProductScreen from '../ProductScreen/ProductScreen';
 import CorouselCenter from '../../Components/CarouselCenter/CarouselCenter';
 import axios from 'axios';
+import path from '../../Config/servAddr';
 
 
 export default function HomeScreen() {
@@ -13,7 +14,7 @@ export default function HomeScreen() {
 
     const getProducts = async () => {
         try{
-            const response = await axios.get("http://localhost:4000/product");
+            const response = await axios.get(`${path.local}/product`);
             setProducts(response.data);
             console.log(response.data);
         }

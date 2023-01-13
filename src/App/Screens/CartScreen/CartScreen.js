@@ -7,34 +7,29 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { ShowChart } from '@mui/icons-material';
+
+import path from '../../Config/servAddr';
 
 export default function Cart() {
-
-  const [quantity, setQuantity] = React.useState(1);
-  const [total, setTotal] = React.useState(1);
 
   const [cartitems, setCartItems] = React.useState([]);
   const [user, setUser] = React.useState({});
 
 
-
-
-
   const getCartItems = async () => {
     console.log("user",user);
     try{
-      const response = await axios.get(`http://localhost:4000/cart/find/${user && user.userId}`,{
+      const response = await axios.get(`${path.local}/cart/find/${user && user.userId}`,{
         headers: {
           'Authorization': `bearer ${user.token}`
         }
       });
-      console.log("here is cartitems",response.data[0].products);
+      // console.log("here is cartitems",response.data[0].products);
       setCartItems(response.data[0].products);
+      console.log("cartitems",...response.data[0].products);
     }
     catch(err){
       console.log("in error");
@@ -42,7 +37,7 @@ export default function Cart() {
     }
   }
 
-  const handleRemove = async (id) => {
+  const handleRemove = async (id,title) => {
 
     // console.log("id",id);
 
@@ -53,7 +48,7 @@ export default function Cart() {
       // }
       console.log("user id-->",user.userId,"usertoken --->",user.token);
       
-      const response = await axios.delete(`http://localhost:4000/cart/${user && user.userId}`,
+      const response = await axios.delete(`${path.local}/cart/${user && user.userId}`,
        
         {
           headers: {
@@ -70,7 +65,7 @@ export default function Cart() {
       console.log(response.data);
       Swal.fire({
         title: 'Success',
-        text: response.data,
+        text: `${title} removed from cart`,
         icon: 'success',
       })
 
@@ -92,6 +87,38 @@ export default function Cart() {
 
   },[user.userId])
 
+  const handleIncrement = (id) => {
+
+    console.log("increment",id);
+    const newCart = cartitems.map((product) => {
+      if(product._id === id) {
+        return {
+          ...product,
+          quantity: product.quantity + 1,
+          total: product.price * (product.quantity + 1)
+        }
+      }
+      return product;
+    })
+    setCartItems(newCart);
+
+  }
+
+  const handleDecrement = (id) => {
+    console.log("decrement",id);
+    const newCart = cartitems.map((product) => {
+      if(product._id === id) {
+        return {
+          ...product,
+          quantity: product.quantity - 1,
+          total: product.price * (product.quantity - 1)
+        }
+      }
+      return product;
+    })
+    setCartItems(newCart);
+  }
+
 
   return (
     <div>
@@ -101,13 +128,37 @@ export default function Cart() {
         textAlign: 'center',
         fontWeight:'800',
         letterSpacing: '1px'
-      }}>My Cart</h2>
+      }}>Your Cart</h2>
+
+
 
     <Container
     style={{
       overflow: 'hidden'
     }}
     >
+
+      {
+        cartitems.length === 0 && 
+        <div
+        style={{
+          textAlign: 'center',
+          marginTop: '2rem',
+          color: 'white',
+          fontSize: '1.5rem',
+          fontWeight: '600'
+        }}
+        >
+          <h3
+          >Your Cart is Empty</h3>
+          <Link to='/home'>
+          <Button variant="primary" style={{
+            marginTop: '1rem'
+          }}>Go to Home</Button>
+          </Link>
+        </div>
+
+      }
 
       <Row lg={4} sm={3} md={3}
           style={{
@@ -150,22 +201,20 @@ export default function Cart() {
               <div className="quantity">
           <button className="minus-btn" type="button" name="button"
           onClick={ () => {
-            if(quantity > 1) {
-              setQuantity(quantity - 1);
+            if(product.quantity > 1) {
+              handleDecrement(product._id);
             }
-            else{
-              setQuantity(1);
-            }
+
           }
           }
           >
             -
           </button>
       
-          <input type="text" name="name" value={quantity} className="input"/>
+          <input type="text" name="name" value={product.quantity} className="input"/>
       
           <button className="plus-btn" type="button" name="button"
-          onClick={() => setQuantity(quantity + 1)}
+          onClick={() => handleIncrement(product._id)}
           >
             +
           </button>
@@ -191,7 +240,7 @@ export default function Cart() {
               float: 'right',
             }}
             onClick={() => {
-              handleRemove(product.productId);
+              handleRemove(product.productId,product.title);
             }}
             >Remove</Button>
             </Card.Body>
@@ -214,6 +263,10 @@ export default function Cart() {
     </Container>
 
     <br></br>
+
+    {cartitems.length > 0 &&
+
+    <>
 
     
     <h2 style={{
@@ -248,12 +301,38 @@ export default function Cart() {
     </tr>
   </thead>
   <tbody>
+    
     <tr>
-      <td data-label="No. of Items">5</td>
-      <td data-label="Subtotal">$3412</td>
-      <td data-label="Tax">$216</td>
-      <td data-label="Shipping">$110</td>
-      <td data-label="Total">$20020</td>
+      <td data-label="No. of Items">
+        {
+          cartitems.reduce((acc, item) => acc + item.quantity, 0)
+        }
+      </td>
+      <td data-label="Subtotal">
+        {
+          cartitems.reduce((acc, item ,quantity) => acc + item.price * item.quantity, 0).toFixed(2)
+        }
+      </td>
+      <td data-label="Tax">
+        {
+          (cartitems.reduce((acc, item) => acc + item.price*item.quantity , 0) * 0.18).toFixed(2)
+        }
+      </td>
+      <td data-label="Shipping">
+        {
+          (cartitems.reduce((acc, item) => acc + item.price * item.quantity , 0) * 0.01).toFixed(2)
+        }
+      </td>
+      <td data-label="Total">
+        {
+          (cartitems.reduce((acc, item) => acc + item.price*item.quantity, 0) 
+          + 
+          cartitems.reduce((acc, item) => acc + item.price*item.quantity, 0) * 0.18
+          + 
+          cartitems.reduce((acc, item) => acc + item.price*item.quantity , 0) * 0.01
+          ).toFixed(2)
+        }
+      </td>
     </tr>
    
  
@@ -274,12 +353,21 @@ export default function Cart() {
       textAlign: 'center',
    }}
    >
-    <Link to="/home/checkout">
-      <Button variant="primary" >
+    <Link to="/home/checkout" 
+
+    state={{
+      cart : cartitems
+    }}
+     
+    >
+      <Button variant="primary" 
+      >
         Checkout
       </Button>
     </Link>
    </div>
+   </>
+}
 
  
 
