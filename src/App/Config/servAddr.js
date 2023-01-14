@@ -1,5 +1,5 @@
 const path = {
-    local: 'http://localhost:4000',
+    local: 'https://smooth-snakes-show-152-58-220-48.loca.lt/',
     remote: 'https://cartify-backend.herokuapp.com',
 }
 
