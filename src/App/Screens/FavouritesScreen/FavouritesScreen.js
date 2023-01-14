@@ -121,7 +121,7 @@ export default function FavouritesScreen() {
         
 
 <div class="wish_testimonial-box">
-<Link to="/home/product/id">
+{/* <Link to="/home/product/id"> */}
 <div class="wish_box-top">
     
    
@@ -154,7 +154,7 @@ export default function FavouritesScreen() {
         <i class="far fa-star"></i>
     </div>
 </div>
-</Link>
+{/* </Link> */}
 
 {/* <div class="wish_client-comment">
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>

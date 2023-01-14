@@ -19,14 +19,14 @@ export default function CorouselComponent() {
       {images.map((image) => 
 
 <Carousel.Item>
-<Link to="/home/product/id">
+{/* <Link to="/home/product/id"> */}
 <img
   className="d-block w-100 carousel-image"
   src={image}
   alt="First slide"
 
 />
-</Link>
+{/* </Link> */}
 {/* <Carousel.Caption>
   <h3>First slide label</h3>
   <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>

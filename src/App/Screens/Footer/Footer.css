@@ -122,6 +122,17 @@ footer{
     transform: translate(0, -10px);
     transition: all 0.4s ease;
   }
+  ul li {
+    list-style: none;
+    color:white;
+  }
+
+  .phone {
+    color: #fff;
+  }
+  .email{
+    color: #fff;
+  }
 
   /* .content .media-icons a:hover :nth-child(odd){
     color: #3b5998;

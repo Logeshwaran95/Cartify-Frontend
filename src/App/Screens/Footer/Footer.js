@@ -1,4 +1,5 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import './Footer.css'
 
 export default function Footer() {
@@ -20,10 +21,10 @@ export default function Footer() {
        <div class="lower">
          <div class="topic">Contact us</div>
          <div class="phone">
-           <a href="#"><i class="fas fa-phone-volume"></i>+007 9089 6767</a>
+           <a><i class="fas fa-phone-volume"></i>1234567890</a>
          </div>
          <div class="email">
-           <a href="#"><i class="fas fa-envelope"></i>Cartify@gmail.com</a>
+           <a><i class="fas fa-envelope"></i>Cartify@gmail.com</a>
          </div>
        </div>
      </div>
@@ -34,23 +35,46 @@ export default function Footer() {
           listStyleType: 'none',
        }}
        >
-          <li><a href="#">Delivery</a></li>
-          <li><a href="#">Return</a></li>
-          <li><a href="#">Payment</a></li>
-          <li><a href="#">Cancellation</a></li>
+          <li><a>Delivery</a></li>
+          <li><a>Return</a></li>
+          <li><a>Payment</a></li>
+          <li><a>Cancellation</a></li>
        </ul>
      </div>
      <div class="right box">
        <div class="topic">Newsletter</div>
        <form action="#">
          <input type="text" placeholder="Enter email address"/>
-         <input type="submit" name="" value="Subscribe"/>
+         <input type="submit" name="" value="Subscribe"
+         onClick={(e) => {
+            e.preventDefault()
+            Swal.fire({
+                title: 'Yahoo !',
+                text: 'Subscribed to Newsletter',
+                icon: 'success',
+
+            })
+         }}
+         />
          <div class="media-icons">
-           <a href="#"><i class="fab fa-facebook-f"></i></a>
-           <a href="#"><i class="fab fa-instagram"></i></a>
-           <a href="#"><i class="fab fa-twitter"></i></a>
-           <a href="#"><i class="fab fa-youtube"></i></a>
-           <a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+         <a href="https://github.com/Logeshwaran95"
+          target={"_blank"}
+         ><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/logeshwaran-/"
+          target={"_blank"}
+          ><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/logeshsiva95/"
+          target={"_blank"}
+          ><i class="fab fa-instagram"></i></a>
+           <a href="https://www.youtube.com/@operationgaming95"
+          target={"_blank"}
+           ><i class="fab fa-youtube"></i></a>
+          <a href="https://twitter.com/Logeshwaran395"
+          target={"_blank"}
+          ><i class="fab fa-twitter"></i></a>
+           {/* <a href="#"><i class="fab fa-youtube"></i></a> */}
+          
          </div>
        </form>
      </div>

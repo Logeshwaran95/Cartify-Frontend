@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import path from '../../Config/servAddr';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function MyVerticallyCenteredModal(props) {
   const theme = localStorage.getItem('CartifyTheme');
@@ -139,16 +140,72 @@ export default function OrdersScreen() {
   }
 
 
+
+
   React.useEffect(() => {
       getOrders();
   },[])
 
-  const items = ['item1','item2','item3','item4','item5'];
   const [modalShow, setModalShow] = React.useState(false);
 
   const handleClick = (product) => {
     setModalData(product);
     setModalShow(true);
+  }
+
+  const cancelOrder = async (order) => {
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    try{
+
+      const response = await axios.delete(`${path.local}/order/${order._id}`,{
+        headers: {
+          Authorization: `bearer ${user.token}`
+        },
+      }
+      );
+      console.log(response.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Order Cancelled',
+        text: 'Your order has been cancelled',
+      })
+      getOrders();
+  }
+  catch(error){
+    console.log(error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+    })
+  }
+  }
+
+  const handleCancel = async (order) => {
+
+      Swal.fire({
+        title: 'Cancel the order ?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, cancel it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          cancelOrder(order);
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'You cancelled the action',
+            text: 'Action Reverted',
+          })
+        }
+
+
+      })
+
   }
 
   return (
@@ -202,7 +259,7 @@ export default function OrdersScreen() {
 <h2
   style={{
     textAlign: 'center',
-    margin: '2rem',
+    margin: '1rem',
     fontWeight: '600',
     letterSpacing: '1px',
     color: 'white',
@@ -212,6 +269,14 @@ export default function OrdersScreen() {
       order._id.slice(-10)
     }
   </h2>
+
+  <Button variant="primary" onClick={() => handleCancel(order)}
+  style={{
+    margin: '1rem',
+  }}
+  >
+    Cancel Order
+  </Button>
 
 
   <table>
