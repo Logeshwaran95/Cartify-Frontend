@@ -17,9 +17,6 @@ import axios from 'axios';
 import path from '../../Config/servAddr';
 
 
-
-
-
 export default function ProductDetailsScreen() {
 
   const location = useLocation();
@@ -210,7 +207,7 @@ export default function ProductDetailsScreen() {
         marginTop: '20px',
         marginBottom: '20px',
     }}
-    >${product.price*quantity}</h3>
+    >${product.originalPrice *quantity}</h3>
 
     <div className="quantity">
     <button className="minus-btn" type="button" name="button"
