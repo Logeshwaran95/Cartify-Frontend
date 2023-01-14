@@ -366,9 +366,9 @@ export default function CheckoutScreen() {
         >Proceed with Cash On Delivery</Button>
 
       </Tab>
-      <Tab eventKey="Credit Card" title="Credit Card">
+      <Tab eventKey="Credit Card" title="Credit Card" disabled>
         
-        <Payment />
+        {/* <Payment /> */}
 
       </Tab>
       <Tab eventKey="UPI" title="UPI" disabled>
