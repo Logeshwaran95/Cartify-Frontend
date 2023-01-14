@@ -89,7 +89,7 @@ function OffcanvasExample() {
               <Offcanvas.Body>
                 <Nav className="justify-content-center mr-auto flex-grow-1 pe-3">
                 <ul>
-    <li class="myli"><a href="/" className="mya">
+    <li class="myli"><a className="mya">
       <Link to="/home"
       className="linkbtn"
       >home</Link>
@@ -99,7 +99,7 @@ function OffcanvasExample() {
 className="linkbtn"
       >Seller</Link>
       </a></li> */}
-    <li class="myli"><a href="#" className="mya"> 
+    <li class="myli"><a className="mya"> 
     <Link to="/home/cart"
     className="linkbtn"
       >Cart</Link>
@@ -109,7 +109,7 @@ className="linkbtn"
    className="linkbtn"
       >Notifications</Link>
       </a></li> */}
-    <li class="myli"><a href="#" className="mya"> 
+    <li class="myli"><a className="mya"> 
     <Link to="/home/account"
 className="linkbtn"
       >Account</Link>
