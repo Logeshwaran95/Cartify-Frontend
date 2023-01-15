@@ -7,7 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import "./Navbar.css"
-
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 // import { createGlobalStyle } from 'styled-components';
 
@@ -19,8 +20,11 @@ import "./Navbar.css"
 
 function OffcanvasExample() {
 
+  const navigate = useNavigate();
+
   const navRef = React.useRef(null);
   const [navbarColor, setNavbarColor] = React.useState("transparent");
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +41,22 @@ function OffcanvasExample() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(searchQuery);
+
+    if(searchQuery === ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter a search query!',
+      })
+      return;
+    }
+
+    navigate(`/home/product/search/${searchQuery}`);
+  }
 
 
   return (
@@ -114,6 +134,13 @@ className="linkbtn"
 className="linkbtn"
       >Account</Link>
        </a></li>
+
+       <li class="myli"><a className="mya"> 
+    <Link to="/home/product/filter"
+className="linkbtn"
+      >Filter</Link>
+       </a></li>
+
   </ul>
                   {/* <Nav.Link href="#" style={{marginLeft:"20px"}}>Home</Nav.Link>
                   <Nav.Link href="#" style={{marginLeft:"20px"}}>Cart</Nav.Link>
@@ -132,7 +159,13 @@ className="linkbtn"
                     </NavDropdown.Item>
                   </NavDropdown> */}
                 </Nav>
-                <Form className="d-flex">
+                <Form className="d-flex"
+                 onSubmit={
+                  (e) => {
+                    handleSearch(e);
+                  }
+                }
+                >
                   <Form.Control
                     type="search"
                     placeholder="Search"
@@ -141,12 +174,20 @@ className="linkbtn"
                     style={{
                       margin:"2px",
                     }}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                   
+                
                   />
                   <Button variant="primary" 
-                  onClick={() => {
-                    alert("Search button clicked");
+                  style={{
+                    height:"43px",
                   }}
                   id="searchbtn"
+                  onClick={
+                    (e) => {
+                      handleSearch(e);
+                    }
+                  }
                   >Search</Button>
                 </Form>
               </Offcanvas.Body>

@@ -1,59 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "./FavouritesScreen.css"
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
+import "./SearchResultScreen.css"
+import { useParams } from 'react-router-dom';
 
 import path from '../../Config/servAddr';
 import Loader from '../../Components/Loader';
 
 
-export default function FavouritesScreen() {
+export default function SearchResultsScreen(props) {
+
+    const { searchQuery } = useParams();
+    console.log(searchQuery);
 
 
     const [user, setUser] = React.useState({});
 
-    const [wishlists, setWishLists] = React.useState([]);
+    const [search, setSearch] = React.useState([]);
 
     const [loading, setLoading] = React.useState(false);
 
-    const removeWishList = async (productId) => {
 
-        try{
 
-            console.log("user id-->",user.userId,"usertoken --->",user.token);
-      
-      const response = await axios.delete(`${path.local}/wishlist`,
-       
-        {
-          headers: {
-            Authorization: `bearer ${user.token}`
-          },
-          data: {
-            productId: productId,
-            userId: user.userId
-          }
-        }
-
-        
-      )
-
-      console.log(response.data);
-      Swal.fire({
-        title: 'Success',
-        text: response.data,
-        icon: 'success',
-      })
-
-      getWishLists();
-        }
-        catch(err){
-            console.log(err.response.data);
-        }
-    }
-
-    const getWishLists = async () => {
+    const getSearchLists = async () => {
 
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
@@ -61,13 +32,13 @@ export default function FavouritesScreen() {
         try{
 
             setLoading(true);
-            const response = await axios.get(`${path.local}/wishlist/find/${user && user.userId}`,{
+            const response = await axios.get(`${path.local}/product/search/${searchQuery && searchQuery}`,{
                 headers: {
                     Authorization: `bearer ${user.token}`
                 }
             });
-            console.log(response.data[0].products);
-            setWishLists(response.data[0].products);
+            console.log(response.data);
+            setSearch(response.data);
             setLoading(false);
         }
         catch(err){
@@ -76,11 +47,13 @@ export default function FavouritesScreen() {
     }
 
     React.useEffect(() => {
+    
+
     const currentUser = localStorage.getItem('currentUser');
     const data = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
     setUser(data);
-        getWishLists();
-    },[])
+        getSearchLists();
+    },[searchQuery])
 
   return (
     <div>
@@ -94,17 +67,20 @@ export default function FavouritesScreen() {
             fontWeight: "800",
             letterSpacing: "1px",
         }}
-        >Your Wishlist</h2>
+        >
+            Search Results for : &nbsp;
+            {
+            searchQuery && searchQuery
+        }</h2>
 
         <Loader loading={loading} />
 
 
-
          
- <div class="wish_testimonial-box-container">
+ <div class="search_testimonial-box-container">
 
  {
-        wishlists.length === 0 && !loading &&
+        search.length === 0 && !loading &&
         <div
         style={{
           textAlign: 'center',
@@ -115,7 +91,9 @@ export default function FavouritesScreen() {
         }}
         >
           <h3
-          >Your Wishlist is Empty</h3>
+          >
+            No Products Found
+          </h3>
           <Link to='/home'>
           <Button variant="primary" style={{
             marginTop: '1rem'
@@ -126,27 +104,32 @@ export default function FavouritesScreen() {
       }
 
         {
-        wishlists && 
-        wishlists.map((product) => 
+        search && 
+        search.map((product) => 
         
 
-<div class="wish_testimonial-box">
+       
+<div class="search_testimonial-box">
 {/* <Link to="/home/product/id"> */}
-<div class="wish_box-top">
+
+<Link to="/home/product/" 
+		state={{product: product}}
+		>
+<div class="search_box-top">
     
    
   
-    <div class="wish_profile">
+    <div class="search_profile">
         
      
       
-        <div class="wish_profile-img">
+        <div class="search_profile-img">
             <img src={
                 product.image
             }/>
         </div>
       
-        <div class="wish_name-user">
+        <div class="search_name-user">
             <strong>
                 {product.title}
             </strong>
@@ -156,7 +139,7 @@ export default function FavouritesScreen() {
         </div>
     </div>
  
-    <div class="wish_reviews">
+    <div class="search_reviews">
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
@@ -166,19 +149,25 @@ export default function FavouritesScreen() {
 </div>
 {/* </Link> */}
 
-{/* <div class="wish_client-comment">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-</div> */}
-<Button variant="danger" className="wish_btn"
-onClick={() => {
-    removeWishList(product.productId);
-}}
->Remove</Button>
+<div class="wish_client-comment">
+    <p>
+        {product.shortDescription}
+    </p>
 </div>
+{/* <Button variant="danger" className="wish_btn"
+
+>Remove</Button> */}
+</Link>
+</div>
+
         
         )}
 
+
+
 </div>
+
+
 
 
       

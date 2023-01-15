@@ -3,6 +3,9 @@
 }
 .new img{
     max-width: 90%;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: center;
 }
 
 @media (max-width:450px){

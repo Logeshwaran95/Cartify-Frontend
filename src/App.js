@@ -36,6 +36,8 @@ import Swal from 'sweetalert2';
 import OrdersScreen from './App/Screens/OrdersScreen/OrdersScreen';
 import FavouritesScreen from './App/Screens/FavouritesScreen/FavouritesScreen';
 import HomeScreen from './App/Screens/HomeScreen/HomeScreen';
+import SearchResultScreen from './App/Screens/SearchResultScreen/SearchResultScreen';
+import FilterScreen from './App/Screens/FilterScreen/FilterScreen';
 // const GlobalStyle = createGlobalStyle`
 //   body {
 //     background-image: ${colors.primary};
@@ -157,6 +159,26 @@ function App() {
     )
   }
 
+  const SearchResultScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <SearchResultScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
+  const FilterScreenContainer = () => {
+    return (
+      <div>
+        <Navbar/>
+        <FilterScreen/>
+        <Footer/>
+      </div>
+    )
+  }
+
   return (
     <div style={{
       background: theme
@@ -177,6 +199,8 @@ function App() {
         <Route path="/home/orders" element={<OrdersScreenContainer/>} />
         <Route path="/home/wishlist" element={<FavouritesScreenContainer/>} />
         <Route path="/home/product/id/reviews" element={<ReviewsScreenContainer/>} />
+        <Route path="/home/product/search/:searchQuery" element={<SearchResultScreenContainer/>}  />
+        <Route path="/home/product/filter" element={<FilterScreenContainer />} />
       </Routes>
 
 

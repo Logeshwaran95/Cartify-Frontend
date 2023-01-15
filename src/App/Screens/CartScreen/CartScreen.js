@@ -12,16 +12,19 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import path from '../../Config/servAddr';
+import Loader from '../../Components/Loader';
 
 export default function Cart() {
 
   const [cartitems, setCartItems] = React.useState([]);
   const [user, setUser] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
 
 
   const getCartItems = async () => {
     console.log("user",user);
     try{
+      setLoading(true);
       const response = await axios.get(`${path.local}/cart/find/${user && user.userId}`,{
         headers: {
           'Authorization': `bearer ${user.token}`
@@ -30,6 +33,7 @@ export default function Cart() {
       // console.log("here is cartitems",response.data[0].products);
       setCartItems(response.data[0].products);
       console.log("cartitems",...response.data[0].products);
+      setLoading(false);
     }
     catch(err){
       console.log("in error");
@@ -139,7 +143,7 @@ export default function Cart() {
     >
 
       {
-        cartitems.length === 0 && 
+        cartitems.length === 0 && !loading && 
         <div
         style={{
           textAlign: 'center',
@@ -159,6 +163,8 @@ export default function Cart() {
         </div>
 
       }
+
+      <Loader loading={loading} />
 
       <Row lg={4} sm={3} md={3}
           style={{

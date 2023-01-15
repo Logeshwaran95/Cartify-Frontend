@@ -7,6 +7,7 @@ import axios from 'axios';
 import path from '../../Config/servAddr';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Loader from '../../Components/Loader';
 
 function MyVerticallyCenteredModal(props) {
   const theme = localStorage.getItem('CartifyTheme');
@@ -117,11 +118,14 @@ export default function OrdersScreen() {
 
   const [orders, setOrders] = React.useState([]);
   const [modalData, setModalData] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
 
   const getOrders = async () => {
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
     try{
+
+          setLoading(true);
           const response = await axios.get(`${path.local}/order/find/${user.userId}`,{
             headers: {
               Authorization: `bearer ${user.token}`
@@ -133,6 +137,7 @@ export default function OrdersScreen() {
           });
           console.log(response.data);
           setOrders(response.data);
+          setLoading(false);
     }
     catch(error){
       console.log(error);
@@ -223,6 +228,8 @@ export default function OrdersScreen() {
         Your Orders
       </h2>
 
+      <Loader loading={loading} />
+
 
 
 
@@ -230,7 +237,7 @@ export default function OrdersScreen() {
 <section id="order_testimonials">
 
   {
-    orders.length === 0 && 
+    orders.length === 0 && !loading &&
     <>
         <h2 
         style={{

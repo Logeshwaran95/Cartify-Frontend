@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "./CarouselCenter.css"
 
-export default class CenterMode extends Component {
+const CenterMode = (props) => {
+
+  const product = props.data;
   
-  render() {
 
     const items = ['item1', 'item2', 'item3', 'item4', 'item5'];
 
@@ -45,23 +46,31 @@ export default class CenterMode extends Component {
     };
     return (
       <div className="centercontainer">
+
         <Slider {...settings}>
 
-          {items.map(
+          {product.map(
             (item) => 
-          
-          // <Link to="/home/product/id">
-          <div className="new">
-          <img src="https://s.yimg.com/uu/api/res/1.2/XFrQiAN9AnMM6VrG0empkQ--~B/aD0xMjAwO3c9MTgwMDthcHBpZD15dGFjaHlvbg--/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-06/ed27dac0-ac98-11ea-bfff-f40bb81f4fdb.cf.jpg" alt=""
+
+            <Link to="/home/product/" 
+            state={{product: item}}
+            >
+                       <div className="new">
+          <img src={
+            item.image
+          } alt=""
           // className="imgcenter1"
      
           />
         </div>
-        // </Link>
+            </Link>
+ 
           )}
    
         </Slider>
+ 
       </div>
     );
   }
-}
+
+export default CenterMode;
