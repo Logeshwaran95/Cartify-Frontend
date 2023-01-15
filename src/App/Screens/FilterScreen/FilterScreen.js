@@ -17,6 +17,8 @@ const FilterScreen = () => {
 
     const [filteredProducts, setFilteredProducts] = React.useState([]);
 
+    const [shownnumber, setShownNumber] = React.useState(12);
+
 
 
     const getProducts = async () => {
@@ -351,7 +353,7 @@ const FilterScreen = () => {
                 <Loader
                 loading={true}
                 />
-                : products.slice(0,12).map((product) => (
+                : products.slice(0,shownnumber).map((product) => (
                     <Col>
                         <ProductCard data={product} />
                     </Col>
@@ -361,7 +363,7 @@ const FilterScreen = () => {
               <Loader
               loading={true}
               />
-              : filteredProducts.slice(0,12).map((product) => (
+              : filteredProducts.slice(0,shownnumber).map((product) => (
                 <Col>
                     <ProductCard data={product} />
                 </Col>
@@ -383,8 +385,19 @@ const FilterScreen = () => {
                         fontWeight: "bold",
                     }}
                     >
+                      {
+                        shownnumber < products.length ?
+
+                      
                         <Button variant="primary"
+                        onClick={
+                            () => {
+                                setShownNumber(shownnumber + 12);
+                            }
+                        }
                         >Load More</Button>
+                        : null
+                      }
                     </h2>
               
                     : null

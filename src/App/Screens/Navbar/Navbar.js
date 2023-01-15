@@ -129,16 +129,18 @@ className="linkbtn"
    className="linkbtn"
       >Notifications</Link>
       </a></li> */}
-    <li class="myli"><a className="mya"> 
-    <Link to="/home/account"
-className="linkbtn"
-      >Account</Link>
-       </a></li>
+
 
        <li class="myli"><a className="mya"> 
     <Link to="/home/product/filter"
 className="linkbtn"
       >Filter</Link>
+       </a></li>
+
+       <li class="myli"><a className="mya"> 
+    <Link to="/home/account"
+className="linkbtn"
+      >Account</Link>
        </a></li>
 
   </ul>

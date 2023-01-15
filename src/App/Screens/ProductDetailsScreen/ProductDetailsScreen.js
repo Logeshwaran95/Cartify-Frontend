@@ -1,6 +1,6 @@
 import { borderRadius } from '@mui/system';
 import React from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 import path from '../../Config/servAddr';
+import { get } from 'mongoose';
 
 
 export default function ProductDetailsScreen() {
@@ -25,6 +26,12 @@ export default function ProductDetailsScreen() {
   const [currImage, setCurrImage] = React.useState(product && product.image);
   const [quantity, setQuantity] = React.useState(1);
   const [currTab,setCurrTab] = React.useState('Description');
+
+  const [showReviewModal, setShowReviewModal] = React.useState(false);
+  const [rating, setRating] = React.useState(0);
+  const [review, setReview] = React.useState('');
+  const [reviewdata, setReviewData] = React.useState([]);
+  const [reviewCount, setReviewCount] = React.useState(6);
 
   const [show, setShow] = React.useState(false);
 
@@ -38,8 +45,6 @@ export default function ProductDetailsScreen() {
   //   window.scrollTo(0, 0);
   // })
 
-
-  const items = ['item1','item2','item3'];
 
   const handleAddToCart = async (product) => {
 
@@ -145,6 +150,77 @@ export default function ProductDetailsScreen() {
 
   }
 
+  const handleReview = async () => {
+
+      if(rating !== 0 && review !== ''){
+        console.log("rating",rating);
+        console.log("review",review);
+        const currentUser = localStorage.getItem('currentUser');
+      const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+  
+      const myobj = {
+        userId: user.userId,
+        userName: user.username,
+        rating:rating,
+        review:review,
+        productId: product._id,
+      }
+  
+      try{
+  
+        const response = await axios.post(`${path.local}/review/`,
+        myobj
+        ,{
+          headers: { Authorization: `bearer ${user.token}` }
+        }
+        )
+        console.log(response.data);
+        Swal.fire({
+          title: 'Review Added',
+          text: 'Your review has been added',
+          icon: 'success',
+        })
+      }
+      catch(err){
+        console.log(err);
+        Swal.fire({
+          title: 'Error',
+          text: err.response.data,
+          icon: 'error',
+        })
+        
+      }
+      }
+      else{
+        Swal.fire({
+          title: 'Error',
+          text: 'Please enter a rating and review',
+          icon: 'error',
+        })
+        return;
+      }
+
+      setShowReviewModal(false);
+      getAllReviews();
+      
+      
+  }
+
+  const getAllReviews = async () => {
+    try{
+      const response = await axios.get(`${path.local}/review/find/${product._id}`)
+      console.log(response.data);
+      setReviewData(response.data);
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  React.useEffect(() => {
+    getAllReviews();
+  },[]);
+
   return (
 
     <>
@@ -164,6 +240,55 @@ export default function ProductDetailsScreen() {
           />
         </Modal.Body>
       </Modal>
+
+      <Modal show={showReviewModal}
+      fullscreen
+      onHide={() => setShowReviewModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Write a Review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+            <Form>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Review</Form.Label>
+                    <Form.Control as="textarea" rows={3}
+                    placeholder="Write your review here"
+                    onChange={(e) => setReview(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control as="select"
+                    placeholder='Select Rating'
+                    onChange={(e) => setRating(e.target.value)}
+                    >
+                     <option>Select Rating</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+
+                    </Form.Control>
+                </Form.Group>
+                <br></br>
+
+                <Button variant="danger"
+                onClick={() => handleReview()}
+                >
+                    Post Review
+                </Button>
+
+
+            </Form>
+
+
+        </Modal.Body>
+      </Modal>
+
+
 
 
 
@@ -367,11 +492,25 @@ export default function ProductDetailsScreen() {
         className='title'
         >Reviews</h2>
       
-
-        <Link to='/home/product/id/reviews'>
+        {/* {
+          reviewdata.length > 0 &&
+        
+        <Link to='/home/product/reviews'
+        state={
+          {
+            review: reviewdata,
+          }
+        }
+        >
         <Button variant="primary"
         >View All</Button>
         </Link>
+
+        } */}
+
+        <Button variant="primary"
+        onClick={() => setShowReviewModal(true)}
+        >Write a Review</Button>
 
        </div>
       
@@ -383,14 +522,51 @@ export default function ProductDetailsScreen() {
   
  <div class="testimonial-box-container">
    
+   {
+    reviewdata.length === 0 &&
+    <h2
+    style={{
+      color: "white",
+      fontWeight: "bold",
+      letterSpacing: "1px",
+    }}
+    >No Reviews</h2>
+   }
    
-   {items.map((item) => 
+   {
+   reviewdata &&
+   reviewdata.slice(0,reviewCount).map((item) => 
 
-     <ReviewCard/>
+     <ReviewCard data={
+      item
+     }
+     gatherReviews={getAllReviews}
+     />
 
 )}   
+<br></br>
+
+    
   
      </div>
+     {
+        reviewdata.length > reviewCount &&
+        <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: "20px",
+          margin:"auto",
+          flexWrap: "wrap",
+        }}
+        >
+        <Button variant="primary"
+        onClick={() => setReviewCount(reviewCount + 4)}
+        >Load More</Button>
+        </div>
+
+     }
 </section>
 
       </Tab>

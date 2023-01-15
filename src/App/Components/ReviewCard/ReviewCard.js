@@ -1,11 +1,84 @@
 import React from 'react'
+import Swal from 'sweetalert2';
 import "./ReviewCard.css"
+import axios from 'axios';
+import path from '../../Config/servAddr';
+import { getAllByAltText } from '@testing-library/react';
 
-export default function ReviewCard() {
+export default function ReviewCard(props) {
+
+    const {userName, rating, review } = props.data;
+    
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+
+    const getReview = async() => {
+        await props.gatherReviews();
+    }
+
+    const handleDelete = () => {
+        Swal.fire({
+            title: 'Delete Review ?',
+            text: "Confirm!",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then( async (result) => {
+            if (result.isConfirmed) {
+                const response = await axios.delete(`${path.local}/review`,
+        {
+          headers: {
+            Authorization: `bearer ${user.token}`
+          },
+          data: {
+            productId: props.data.productId,
+            userId: user.userId
+          }
+        }
+
+        
+      ).then(res => {
+                    console.log(res.data);
+                    Swal.fire(
+                    'Deleted!',
+                    'Your review has been deleted.',
+                    'success'
+                    )
+                    
+                    getReview();
+
+                }).catch(err => {
+                    console.log(err);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                }
+                )
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Action Cancelled',
+                    text: 'Your review is safe',
+                })
+            }
+        })
+    }
+
   return (
 
    
-        <div class="testimonial-box">
+        <div class="testimonial-box"
+        onClick={() =>{
+            if(user.userId == props.data.userId){
+                handleDelete();
+            }
+        }}
+        >
           
           <div class="box-top">
              
@@ -18,22 +91,32 @@ export default function ReviewCard() {
                   </div>
                 
                   <div class="name-user">
-                      <strong>Liam mendes</strong>
+                      <strong>
+                        {
+                            userName
+                        }
+                      </strong>
                       <span>@liammendes</span>
                   </div>
               </div>
            
               <div class="reviews">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
+                
+                {
+                   Array.apply(null, Array(rating)).map((item, index) => {
+                        return <span class="fa fa-star checked"></span>
+                    })
+                }
+                 
               </div>
           </div>
    
           <div class="client-comment">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+              <p>
+                {
+                    review
+                }
+              </p>
           </div>
       </div>
   )

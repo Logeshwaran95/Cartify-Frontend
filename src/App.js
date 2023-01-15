@@ -198,7 +198,7 @@ function App() {
         <Route path="/home/account" element={<AccountScreenContainer/>} />
         <Route path="/home/orders" element={<OrdersScreenContainer/>} />
         <Route path="/home/wishlist" element={<FavouritesScreenContainer/>} />
-        <Route path="/home/product/id/reviews" element={<ReviewsScreenContainer/>} />
+        <Route path="/home/product/reviews" element={<ReviewsScreenContainer/>} />
         <Route path="/home/product/search/:searchQuery" element={<SearchResultScreenContainer/>}  />
         <Route path="/home/product/filter" element={<FilterScreenContainer />} />
       </Routes>
