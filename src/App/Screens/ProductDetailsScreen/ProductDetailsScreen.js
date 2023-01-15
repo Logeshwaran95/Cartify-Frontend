@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 import path from '../../Config/servAddr';
-import { get } from 'mongoose';
 
 
 export default function ProductDetailsScreen() {
