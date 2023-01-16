@@ -73,6 +73,9 @@ const FilterScreen = () => {
         e.preventDefault();
         console.log(searchCriteria);
 
+        searchCriteria.priceRange.min = parseInt(searchCriteria.priceRange.min);
+        searchCriteria.priceRange.max = parseInt(searchCriteria.priceRange.max);
+
         
         if(searchCriteria.priceRange.min > searchCriteria.priceRange.max){
             Swal.fire({
@@ -90,7 +93,7 @@ const FilterScreen = () => {
           return (
             (searchCriteria.keyword !=="" ? product.title?.toString().toLowerCase().includes(searchCriteria.keyword) : true)
             &&
-            (searchCriteria.category !== "" ? product.categories.includes(searchCriteria.category) : true)
+            (searchCriteria.category !== "" ? product.categories.toString().toLowerCase().includes(searchCriteria.category) : true)
             &&
             (searchCriteria.priceRange.min !==0 ? product.currentPrice >= searchCriteria.priceRange.min : true)
             &&
@@ -202,6 +205,9 @@ const FilterScreen = () => {
             <option value="">Select a category</option>
             <option value="mobiles">Mobiles</option>
             <option value="laptops">Laptops</option>
+            <option value="camera">Cameras</option>
+            <option value="tv">TV</option>
+            <option value="audio">Audio</option>
             <option value="electronics">Electronics</option>
             <option value="fashion">Fashion</option>
             <option value="sports">Sports</option>
@@ -232,7 +238,9 @@ const FilterScreen = () => {
             <FormControl
               type="number"
               name="min"
-              value={searchCriteria.priceRange.min}
+              value={
+                searchCriteria.priceRange.min==0 ? "" : searchCriteria.priceRange.min
+              }
               onChange={handlePriceChange}
               placeholder="Min Price"
             />
@@ -256,7 +264,9 @@ const FilterScreen = () => {
             <FormControl
               type="number"
               name="max"
-              value={searchCriteria.priceRange.max}
+              value={
+                searchCriteria.priceRange.max==0 ? "" : searchCriteria.priceRange.max
+              }
               onChange={handlePriceChange}
               placeholder="Max Price"
             />

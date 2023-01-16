@@ -1,4 +1,3 @@
-import { borderRadius } from '@mui/system';
 import React from 'react'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
@@ -19,7 +18,14 @@ import path from '../../Config/servAddr';
 
 export default function ProductDetailsScreen() {
 
+  
+
+
   const location = useLocation();
+
+
+
+
   const { product } = location.state;
 
   const [currImage, setCurrImage] = React.useState(product && product.image);
@@ -216,8 +222,27 @@ export default function ProductDetailsScreen() {
     }
   }
 
+  // const getproduct = async () => {
+  //   try{
+  //     const response = await axios.get(`${path.local}/product/find/${
+  //       location.state.productid && location.state.productid
+  //     }`,
+  //     {
+        
+  //     }
+      
+  //     )
+  //     console.log(response.data);
+  //     // setProduct(response.data);
+  //   }
+  //   catch(err){
+  //     console.log(err);
+  //   }
+  // }
+
   React.useEffect(() => {
     getAllReviews();
+    // getproduct();
   },[]);
 
   return (

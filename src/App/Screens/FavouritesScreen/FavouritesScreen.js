@@ -9,6 +9,7 @@ import path from '../../Config/servAddr';
 import Loader from '../../Components/Loader';
 
 
+
 export default function FavouritesScreen() {
 
 
@@ -135,7 +136,10 @@ export default function FavouritesScreen() {
 <div class="wish_box-top">
     
    
-  
+<Link to="/home/product/" 
+		state={{productid: product._id}}
+		>
+
     <div class="wish_profile">
         
      
@@ -154,6 +158,7 @@ export default function FavouritesScreen() {
                 {product.rating}
             </span>
         </div>
+
     </div>
  
     <div class="wish_reviews">
@@ -163,8 +168,12 @@ export default function FavouritesScreen() {
         <i class="fas fa-star"></i>
         <i class="far fa-star"></i>
     </div>
+
+    </Link>
+
 </div>
-{/* </Link> */}
+
+
 
 {/* <div class="wish_client-comment">
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
