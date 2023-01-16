@@ -5,21 +5,21 @@ import "./Carousel.css"
 
 export default function CorouselComponent() {
 
-  const images = ["https://image.api.playstation.com/vulcan/img/rnd/202111/0822/syCdM5vjxZqsHgHDdT3XZUcF.jpg",
-  "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/01/Screenshot_2023-01-05-12-29-59-937_com.google.android.youtube.jpg?fit=1920%2C1080&ssl=1",
-  "https://www.gamerevolution.com/wp-content/uploads/sites/2/2022/09/new-skullcandy-gaming-headsets.jpg?w=640"
-]
+  const images = ["./c1.png","./c2.png","./c9.png","./c3.png","./c4.png","./c8.png","./c7.png","./c5.png","./c6.png","./c10.png"];
+
   
   return (
     <div>
           <Carousel 
           interval={5000}
+          fluid
           >
 
       {images.map((image) => 
 
 <Carousel.Item>
 {/* <Link to="/home/product/id"> */}
+
 <img
   className="d-block w-100 carousel-image"
   src={image}

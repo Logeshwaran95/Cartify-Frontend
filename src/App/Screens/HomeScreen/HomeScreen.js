@@ -51,11 +51,11 @@ export default function HomeScreen() {
 
   return (
     <div>
-         <h2
+         {/* <h2
         className='titleText'
         >
         Trending
-        </h2>
+        </h2> */}
 
         <CarouselComp/>
 
