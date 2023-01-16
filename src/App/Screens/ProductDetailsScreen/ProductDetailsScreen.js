@@ -38,6 +38,8 @@ export default function ProductDetailsScreen() {
   const [reviewdata, setReviewData] = React.useState([]);
   const [reviewCount, setReviewCount] = React.useState(6);
 
+  const [actualrating, setActualRating] = React.useState(0);
+
   const [show, setShow] = React.useState(false);
 
   function handleShow() {
@@ -155,6 +157,42 @@ export default function ProductDetailsScreen() {
 
   }
 
+  const updateProductRating = async () => {
+
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    const rating = actualrating;
+    const productId = product._id;
+    const numberOfReviews = reviewCount + 1;
+    console.log("rating",rating);
+
+    const myobj = {
+      rating: rating,
+      numReviews: numberOfReviews
+    }
+
+    try{
+      	
+			  const response = await axios.put(`http://localhost:4000/product/${productId}`,
+			  {
+        rating: rating,
+        numReviews: numberOfReviews
+        }
+			  ,{
+				headers: {
+				  Authorization: `bearer ${user.token}`
+				}
+			  }
+			  
+			  )
+        console.log(response);
+    }
+    catch(err){
+        console.log(err);
+    }
+
+  }
+
   const handleReview = async () => {
 
       if(rating !== 0 && review !== ''){
@@ -185,6 +223,9 @@ export default function ProductDetailsScreen() {
           text: 'Your review has been added',
           icon: 'success',
         })
+
+        updateProductRating();
+
       }
       catch(err){
         console.log(err);
@@ -216,6 +257,18 @@ export default function ProductDetailsScreen() {
       const response = await axios.get(`${path.local}/review/find/${product._id}`)
       console.log(response.data);
       setReviewData(response.data);
+      setReviewCount(response.data.length);
+
+      if(response.data.length === 0){
+        setActualRating(0);
+        return;
+      }
+
+      setActualRating(
+        response.data.reduce((acc, item) => item.rating + acc, 0) /
+          response.data.length
+      )
+      console.log("actualrating",actualrating);
     }
     catch(err){
       console.log(err);
@@ -240,10 +293,47 @@ export default function ProductDetailsScreen() {
   //   }
   // }
 
+  const handleWriteReview = async () => {
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+
+    try{
+      const response = await axios.get(`${path.local}/review/find/user/${user.userId}`)
+      console.log(response.data);
+      if(response.data.length >0){
+        response.data.map((item) => {
+          if(item.productId === product._id){
+            Swal.fire({
+              title: 'Error',
+              text: 'You have already written a review for this product',
+              icon: 'error',
+            })
+            setShowReviewModal(false);
+            return;
+          }
+          else{
+            setShowReviewModal(true);
+          }
+        })
+      }
+      else{
+        setShowReviewModal(true);
+      }
+
+    }
+    catch(err){
+      console.log(err);
+    }
+    
+
+  }
+
   React.useEffect(() => {
     getAllReviews();
     // getproduct();
-  },[]);
+  },[
+    actualrating
+  ]);
 
   return (
 
@@ -394,17 +484,63 @@ export default function ProductDetailsScreen() {
             style={{
               color:"yellow",
             }}
-            > {product.rating}</span>
+            > 
+            &nbsp;
+            &nbsp;
+            {
+              actualrating && 
+              actualrating?.toFixed(1)
+            }
+            </span>
              </h2>
-          <p>1234 ratings</p>
+          <p>
+            {
+              reviewCount > 0 ?
+              reviewCount + ' People rated this product' :
+              'No Ratings yet'
+            }
+             </p>
           <div class="reviews">
-              {product.rating >= 1 ? 
+              {/* {
+                actualrating==0 && 
+                Array.from({length: 5}, () =>
+                <i class="far fa-star"></i>)
+                
+              } */}
+
+              {actualrating >= 1 ? 
               
-              Array.from({length: product.rating}, () =>
+              Array.from({length: actualrating }, () =>
               <i class="fas fa-star"></i>) :
+              null
               
-              
-              <i class="far fa-star"></i>}
+              }
+{/* 
+              {
+                //check if there is 0.5
+                product.rating % 1 !== 0 &&
+                <i class="fas fa-star-half-alt"></i>
+
+              } */}
+
+              {/* {
+                actualrating.toFixed(1) %10 !== 0 &&
+                <i class="fas fa-star-half-alt"></i>
+              } */}
+
+              {
+                Array.from({length: 
+                5-Math.floor(actualrating)
+                }, () =>
+                <i class="far fa-star"></i>)
+
+              }
+{/* 
+              {
+                actualrating.toFixed(1) %10 !== 0 &&
+                <i class="far fa-star"></i>
+
+              } */}
 
            </div>
 
@@ -533,7 +669,9 @@ export default function ProductDetailsScreen() {
         } */}
 
         <Button variant="primary"
-        onClick={() => setShowReviewModal(true)}
+        onClick={() => 
+        handleWriteReview(product)
+      }
         >Write a Review</Button>
 
        </div>
@@ -564,6 +702,8 @@ export default function ProductDetailsScreen() {
      <ReviewCard data={
       item
      }
+     rating={rating}
+     numReviews={ReviewCard}
      gatherReviews={getAllReviews}
      />
 

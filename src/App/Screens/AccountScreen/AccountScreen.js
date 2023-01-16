@@ -165,7 +165,17 @@ class="toggler" style={{background:colors.primary}}></button>
           <div>
           <h3 className="accname">{username}</h3>
           <p className="accemail">{email}</p>
-          <Button variant="primary" className="accbtn">
+          <Button variant="primary" className="accbtn"
+          onClick={
+            () => {
+              Swal.fire({
+                title: 'Edit Profile Will Be Available Soon',
+                text: "Sorry For The Inconvenience",
+                icon: 'info',
+              })
+            }
+          }
+          >
                   Edit Profile
                 </Button>
           
@@ -217,7 +227,16 @@ class="toggler" style={{background:colors.primary}}></button>
 
               <Button variant="primary" className="accbtn1" style={{
                 margin:"1rem",
-              }}>
+              }}
+              onClick={() => {
+                Swal.fire({
+                  title: 'Return & Refund',
+                  text: 'We are happy to help you with your return and refund. Please contact us at Cartify@gmail.com',
+                  icon: 'info',
+
+                })
+              }}
+              >
                   Return & Refund
                 </Button>
 

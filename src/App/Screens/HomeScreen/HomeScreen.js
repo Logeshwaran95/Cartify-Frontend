@@ -15,13 +15,28 @@ export default function HomeScreen() {
     const [products, setProducts] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
 
+    const [toprated, setToprated] = React.useState([]);
+    const [trending, setTrending] = React.useState([]);
+    const [mostReviewed, setMostReviewed] = React.useState([]);
+    const [mobiles, setMobiles] = React.useState([]);
+    const [laptops, setLaptops] = React.useState([]);
+    const [tv, setTv] = React.useState([]);
+
     const getProducts = async () => {
         try{
             setLoading(true);
             const response = await axios.get(`${path.local}/product`);
             setProducts(response.data);
-            console.log(response.data);
+            // console.log(response.data);
             setLoading(false);
+
+            setLaptops(response.data.filter((item)=>item.categories.toString().toLowerCase().includes("laptops")));
+            setMobiles(response.data.filter((item)=>item.categories.toString().toLowerCase().includes("mobiles")));
+            setTv(response.data.filter((item)=>item.categories.toString().toLowerCase().includes("tv")));
+
+
+            console.log("here are laptops",laptops);
+
         }
         catch(error){
             console.log(error);
@@ -38,13 +53,19 @@ export default function HomeScreen() {
     <div>
          <h2
         className='titleText'
-        >Now On the Air</h2>
+        >
+        Trending
+        </h2>
 
         <CarouselComp/>
 
+
+
+
+
         <h2
         className='titleText'
-        >Prime Deals</h2>
+        >Top Rated</h2>
 
             <Loader loading={loading} />
 
@@ -53,17 +74,42 @@ export default function HomeScreen() {
             />        
 
 
+
         <h2
         className='titleText'
-        >Trending</h2>
+        >Laptops</h2>
 
            
         <Loader loading={loading} />
 
 
         <ProductScreen
-        data={products}
+        data={laptops}
         />
+
+        <h2
+        className='titleText'
+        >Mobiles</h2>
+
+           
+        <Loader loading={loading} />
+
+
+        <ProductScreen
+        data={mobiles}
+        />
+
+        <h2
+        className='titleText'
+        >TV</h2>
+
+        <Loader loading={loading} />
+
+        <ProductScreen
+        data={tv}
+        />
+
+
 
         <h2
         className='titleText'
@@ -72,7 +118,7 @@ export default function HomeScreen() {
 
 
         <CorouselCenter
-        data={products}
+        data={laptops}
         />
         
     </div>
