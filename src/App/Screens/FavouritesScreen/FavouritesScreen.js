@@ -7,10 +7,13 @@ import Swal from 'sweetalert2';
 
 import path from '../../Config/servAddr';
 import Loader from '../../Components/Loader';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function FavouritesScreen() {
+
+    const navigate = useNavigate();
 
 
     const [user, setUser] = React.useState({});
@@ -83,6 +86,31 @@ export default function FavouritesScreen() {
         getWishLists();
     },[])
 
+
+    const handleClick = async (productId) => {
+      
+      try{
+        const response = await axios.get(`${path.local}/product/find/${productId}`);
+        console.log(response.data);
+        navigate('/home/product',{
+          state: {
+            product: response.data
+          }
+        })
+        
+      }
+      catch(err){
+        console.log(err.response.data);
+        Swal.fire({
+          title: 'Error',
+          text: err.response.data,
+          icon: 'error',
+          
+        })
+      }
+    }
+
+
   return (
     <div>
 
@@ -134,11 +162,13 @@ export default function FavouritesScreen() {
 <div class="wish_testimonial-box">
 {/* <Link to="/home/product/id"> */}
 <div class="wish_box-top">
-    
-   
-<Link to="/home/product/" 
-		state={{productid: product._id}}
-		>
+
+
+<div
+onClick={() => {
+  handleClick(product.productId);
+}}
+>
 
     <div class="wish_profile">
         
@@ -154,22 +184,23 @@ export default function FavouritesScreen() {
             <strong>
                 {product.title}
             </strong>
-            <span>
+            {/* <span>
                 {product.rating}
-            </span>
+            </span> */}
         </div>
 
     </div>
  
-    <div class="wish_reviews">
+    {/* <div class="wish_reviews">
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
         <i class="far fa-star"></i>
-    </div>
+    </div> */}
 
-    </Link>
+
+    </div>
 
 </div>
 
@@ -178,11 +209,16 @@ export default function FavouritesScreen() {
 {/* <div class="wish_client-comment">
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
 </div> */}
-<Button variant="danger" className="wish_btn"
+
+<center>
+
+<Button variant="primary" className="wish_btn"
 onClick={() => {
     removeWishList(product.productId);
 }}
 >Remove</Button>
+
+</center>
 </div>
         
         )}

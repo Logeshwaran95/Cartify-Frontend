@@ -4,13 +4,13 @@
 .new img{
     max-width: 90%;
     max-height: 300px;
-    object-fit: cover;
-    object-position: center;
+    object-fit: contain;
+    object-position: contain;
 }
 
 @media (max-width:450px){
     .new img{
-        /* min-height:100px; */
+       
         min-height: 150px;
         max-width:95%;
     }

@@ -118,7 +118,9 @@ export default function HomeScreen() {
 
 
         <CorouselCenter
-        data={laptops}
+        data={
+            tv
+        }
         />
         
     </div>

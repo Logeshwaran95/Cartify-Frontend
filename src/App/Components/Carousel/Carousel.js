@@ -9,9 +9,13 @@ export default function CorouselComponent() {
 
   
   return (
-    <div>
+    <div
+    style={{
+      marginTop: "-12px",
+    }}
+    >
           <Carousel 
-          interval={5000}
+          interval={3000}
           fluid
           >
 

@@ -296,11 +296,16 @@ export default function ProductDetailsScreen() {
   const handleWriteReview = async () => {
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    let canReview = true;
 
     try{
       const response = await axios.get(`${path.local}/review/find/user/${user.userId}`)
       console.log(response.data);
+
+
       if(response.data.length >0){
+
+
         response.data.map((item) => {
           if(item.productId === product._id){
             Swal.fire({
@@ -308,17 +313,16 @@ export default function ProductDetailsScreen() {
               text: 'You have already written a review for this product',
               icon: 'error',
             })
-            setShowReviewModal(false);
-            return;
+            canReview = false;
           }
-          else{
-            setShowReviewModal(true);
-          }
-        })
+        })    
       }
-      else{
+
+      if(canReview){
         setShowReviewModal(true);
       }
+
+
 
     }
     catch(err){

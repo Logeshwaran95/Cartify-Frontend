@@ -64,6 +64,7 @@ function OffcanvasExample() {
     
       {[ 'lg'].map((expand) => (
         <Navbar key={expand} bg="transparent" expand={expand} className="mb-3"
+
         breakpoint={expand}
        
         fixed='top'
@@ -83,7 +84,9 @@ function OffcanvasExample() {
         >
           <Container fluid>
            
-            <Navbar.Brand href="#"
+           <Link to="/home">
+
+            <Navbar.Brand
             style={{
               fontSize: '1.5rem',
               color: 'white',
@@ -95,6 +98,9 @@ function OffcanvasExample() {
               /> */}
               Cartify
             </Navbar.Brand>
+
+            </Link>
+            
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
