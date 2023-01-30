@@ -1,10 +1,24 @@
 .accbtn1{
     margin:2rem;
 }
+.imgcontainer{
+    overflow: hidden;
+    border-radius: 50%;
+}
+
 .accimg{
     height: 30vh;
     object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+    width: 30vh;
+}
+
+
+.accimg:hover{
+    opacity: 0.8;
+    transform:scale3d(1.2,1.2,1.2);
 }
 
 .accContainer{
@@ -67,9 +81,14 @@
     font-weight: 400;
 }
 
-@media screen and (max-width: 575px){
-    /* .accimg{
-        text-align: center;
-        margin-left: 25%;
-    } */
+
+
+@media screen and (max-width: 1205px){
+    .accimg{
+        margin-bottom: 1rem;
+    }
+}
+
+.editlabel{
+    color: black;
 }

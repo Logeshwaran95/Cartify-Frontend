@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import colors from '../../Config/colors';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 
 
 import { Link } from 'react-router-dom';
@@ -20,6 +21,14 @@ export default function Account({setTheme}) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [user, setUser] = useState({});
+  const [profile, setProfile] = useState("");
+
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+  
+  
 
   const Toast = Swal.mixin({
     toast: true,
@@ -33,7 +42,7 @@ export default function Account({setTheme}) {
     timerProgressBar: true
   })
 
-  useEffect(() => {
+  const getUserDetails = async () => {
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
     setUser(user);
@@ -46,10 +55,22 @@ export default function Account({setTheme}) {
       console.log(res.data);
       setUsername(res.data.username);
       setEmail(res.data.email);
+      setProfile(res.data.profilePicture);
+      setAddress(res.data.address);
+      setCity(res.data.city);
+      setCountry(res.data.country);
+      setPhonenumber(res.data.phoneNumber);
+
     }).catch(err => {
       console.log(err);
     })
+  }
+
+  useEffect(() => {
+        getUserDetails();
   }, []);
+
+  
 
   const handleLogout = () => {
 
@@ -78,14 +99,212 @@ export default function Account({setTheme}) {
 
 
   const [show, setShow] = useState(false);
+  const [showEdit,setShowEdit] =useState(false);
   // const [theme, setTheme] = React.useState(colors.primary);
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleEdit = async () => {
+
+    if(address==""
+    && 
+    city==""
+    &&
+    country==""
+    &&
+    phonenumber==""
+
+    ){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Fill All Fields',
+      })
+    }
+    else{
+
+      const currentUser = localStorage.getItem('currentUser');
+      const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+      setUser(user);
+      // console.log(user);
+
+
+      try{
+        const response = await axios.put(`${path.local}/user/${user.userId}`, {
+          address: address,
+          city: city,
+          country: country,
+          phoneNumber: phonenumber
+          
+        },{
+          headers: {
+            'authorization': `bearer ${user.token}`
+          }
+        });
+        Swal.fire({
+          icon: 'success',
+          title: 'Profile Updated',
+          text: 'Profile Updated Successfully',
+
+        })
+        .then(
+          handleCloseEdit()
+        )
+        console.log(response.data);
+  
+
+      }
+      catch(err){
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err,
+        })
+      }
+
+
+  }
+}
+
+  const handleUploadToDB = async (url) => {
+    try{
+      const currentUser = localStorage.getItem('currentUser');
+      const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+      setUser(user);
+
+      const response = await axios.put(`${path.local}/user/${user.userId}`, {
+        profilePicture: url
+      },{
+        headers:{
+          'authorization': `bearer ${user.token}`
+        }
+      });
+      console.log(response.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Profile Picture Updated',
+        text: 'Profile Picture Updated Successfully',
+      })
+      setProfile(url);
+      getUserDetails();
+
+    }
+    catch(err){
+      console.log(err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: err
+      })
+    }
+  }
+
 
   return (
     <Container className='accContainer'>
+
+<Modal show={showEdit} onHide={handleCloseEdit}
+size="lg"
+>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          
+
+        <Form>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        className="editlabel"
+        >Email</Form.Label>
+        <Form.Control type="email" placeholder="Enter Email"
+        value={email}
+        onChange={(e)=> setEmail(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        className="editlabel"
+        >Username</Form.Label>
+        <Form.Control type="text" placeholder="Enter Username"
+        value={username}
+        onChange={(e)=> setUsername(e.target.value)}
+        />
+      </Form.Group>
+      
+
+  
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        className="editlabel"
+        >Address</Form.Label>
+        <Form.Control type="text" placeholder="Enter Address" 
+        value={address}
+        onChange={(e)=> setAddress(e.target.value)}
+        />
+       
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        className="editlabel"
+        >City</Form.Label>
+        <Form.Control type="text" placeholder="Enter City" 
+        value={city}
+        onChange={(e)=> setCity(e.target.value)}
+        />
+
+      </Form.Group>
+
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        className="editlabel"
+        >Country</Form.Label>
+        <Form.Control type="text" placeholder="Enter Country" 
+        value={country}
+        onChange={(e)=> setCountry(e.target.value)}
+        />
+
+      </Form.Group>
+
+
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        className="editlabel"
+        >Phone Number</Form.Label>
+        <Form.Control type="number" placeholder="Enter Phone Number" 
+        value={phonenumber}
+        onChange={(e)=> setPhonenumber(e.target.value)}
+        />
+
+      </Form.Group>
+
+      </Form>
+
+
+
+
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <Button variant="danger" onClick={handleCloseEdit}>
+            Close
+          </Button> */}
+          <Button variant="danger"
+          onClick={()=>{
+            handleEdit()
+          }}
+          >Save Changes</Button>
+        </Modal.Footer>
+      </Modal>
 
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -155,24 +374,68 @@ class="toggler" style={{background:colors.primary}}></button>
         > 
           <div className="accprofile1">
           
-          <div>
-          <img src="https://i.pinimg.com/originals/9a/69/29/9a6929f30854dfeffcceb163945cd3b0.png" alt="Group-1" border="0"
+          <div
+          className='imgcontainer'
+          onClick={
+            () => {
+              Swal.fire({
+                title: 'Change Profile Picture',
+                input: 'file',
+                inputAttributes: {
+                  'accept': 'image/*',
+                  'aria-label': 'Upload your profile picture'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Upload',
+                showLoaderOnConfirm: true,
+                preConfirm: (file) => {
+                  const reader = new FileReader()
+                  reader.readAsDataURL(file)
+                  reader.onload = () => {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('upload_preset', 'ypic2wey');
+                    axios.post('https://api.cloudinary.com/v1_1/dhkcw3quq/image/upload', formData)
+                    .then((res) => {
+                      console.log(res.data.secure_url);
+        
+                      handleUploadToDB(res.data.secure_url);
+
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                      Swal.fire({
+                        title: 'Error Uploading Profile Picture',
+                        icon: 'error',
+                        confirmButtonText: 'Done'
+                      })
+                    })
+                  }
+                }
+              })
+            }
+          }
+          >
+          <img src={
+            profile? profile : "https://i.pinimg.com/originals/9a/69/29/9a6929f30854dfeffcceb163945cd3b0.png"
+          } alt="Group-1" border="0"
               className="accimg"
               />
 
           </div>
 
           <div>
-          <h3 className="accname">{username}</h3>
-          <p className="accemail">{email}</p>
+            
+          <h3 className="accname">{
+            username
+          }</h3>
+          <p className="accemail">{
+            email
+          }</p>
           <Button variant="primary" className="accbtn"
           onClick={
             () => {
-              Swal.fire({
-                title: 'Edit Profile Will Be Available Soon',
-                text: "Sorry For The Inconvenience",
-                icon: 'info',
-              })
+              setShowEdit(true);
             }
           }
           >
