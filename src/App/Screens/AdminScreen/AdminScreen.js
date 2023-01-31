@@ -1,53 +1,74 @@
 import React from "react";
-import {
-  DataProvider,
-  useCreate,
-  useDataProvider,
-  useList,
-  useNotify,
-  useRedirect,
-  useRefresh,
-  useUpdate,
-} from "react-admin";
+import { Tabs, Tab, Button } from "react-bootstrap";
 import { Container, Row, Col, Nav, Navbar } from "react-bootstrap";
+import StatsCard from "../../Components/StatsCard";
+import ChartsCard from "../../Components/ChartsCard";
 
 const AdminDashboard = () => {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    setLoading(true);
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-        setLoading(false);
-      });
-  }, []);
+ 
 
   return (
-    <Container fluid>
-      <Row>
-        <Col xs={2} style={{ position: "fixed", top: "60px", left: "0" }}>
-          <Navbar bg="light" expand="lg"
-          className="sidebar"
-          >
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="flex-column">
-                <Nav.Link href="#">Home</Nav.Link>
-                <Nav.Link href="#">Profile</Nav.Link>
-                <Nav.Link href="#">Settings</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </Col>
-        <Col xs={12} md={10} style={{ marginLeft: "0" }}>
+    <div>
+
+<Tabs
+      defaultActiveKey="dashboard"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+      justify
+    >
+
+
+
+
+      <Tab eventKey="dashboard" title="Dashboard">
+        <h1>hello</h1>
+        <div
+        style={{
+          margin:"1rem"
+        }}
+        >
+        <StatsCard/>
+        <ChartsCard/>
+        </div>
+    
+      </Tab>
+
+
+      
+
+      <Tab eventKey="product" title="Update Products">
         
-          
-        </Col>
-      </Row>
-    </Container>
+        <div>
+      
+            <Button variant="primary">Add Product</Button>
+      
+            <Button variant="primary">Update Product</Button>
+    
+            <Button variant="primary">Delete Product</Button>
+    
+        </div>
+
+
+
+
+
+
+      </Tab>
+
+
+
+
+      <Tab eventKey="orders" title="Handle Orders">
+        <h1>hello</h1>
+      </Tab>
+
+
+
+
+    </Tabs>
+
+    </div>
+    
   );
 };
 
