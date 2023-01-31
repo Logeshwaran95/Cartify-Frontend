@@ -43,28 +43,8 @@ const AdminDashboard = () => {
           </Navbar>
         </Col>
         <Col xs={12} md={10} style={{ marginLeft: "0" }}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Body</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.title}</td>
-                    <td>{item.body}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+        
+          
         </Col>
       </Row>
     </Container>
