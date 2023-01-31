@@ -13,6 +13,7 @@ import './ProductDetailsScreen.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
+import ScrollToTop from '../../Components/ScrollToTop';
 import path from '../../Config/servAddr';
 
 
@@ -347,6 +348,8 @@ export default function ProductDetailsScreen() {
 
     
     <div>
+
+      <ScrollToTop/>
 
 <Modal show={show} fullscreen onHide={() => setShow(false)}>
         <Modal.Header closeButton>

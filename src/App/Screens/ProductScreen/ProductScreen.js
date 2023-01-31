@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import ScrollToTop from "../../Components/ScrollToTop";
 import "./ProductScreen.css";
 
  const ProductScreen = (props) => {
@@ -45,6 +46,7 @@ import "./ProductScreen.css";
     
     return (
       <div className="pscreen">
+        <ScrollToTop/>
         <Slider {...settings}>
 
         {products && products.map((product) => 

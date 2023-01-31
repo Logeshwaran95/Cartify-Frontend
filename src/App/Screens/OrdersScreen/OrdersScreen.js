@@ -8,6 +8,7 @@ import path from '../../Config/servAddr';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loader from '../../Components/Loader';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 function MyVerticallyCenteredModal(props) {
   const theme = localStorage.getItem('CartifyTheme');
@@ -215,6 +216,8 @@ export default function OrdersScreen() {
 
   return (
     <div>
+
+      <ScrollToTop/>
 
       <h2
       style={{

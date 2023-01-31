@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 
 import path from '../../Config/servAddr';
 import Loader from '../../Components/Loader';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 export default function Cart() {
 
@@ -126,6 +127,8 @@ export default function Cart() {
 
   return (
     <div>
+
+      <ScrollToTop/>
 
       <h2 style={{
         color: 'white',

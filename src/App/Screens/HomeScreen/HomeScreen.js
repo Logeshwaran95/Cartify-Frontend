@@ -8,6 +8,7 @@ import axios from 'axios';
 import path from '../../Config/servAddr';
 import { Spinner } from 'react-bootstrap';
 import Loader from '../../Components/Loader';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 
 export default function HomeScreen() {
@@ -51,6 +52,7 @@ export default function HomeScreen() {
 
   return (
     <div>
+        <ScrollToTop/>
          {/* <h2
         className='titleText'
         >

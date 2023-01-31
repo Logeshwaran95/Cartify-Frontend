@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import path from '../../Config/servAddr';
 import Loader from '../../Components/Loader';
 import { useNavigate } from 'react-router-dom';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 
 
@@ -113,6 +114,8 @@ export default function FavouritesScreen() {
 
   return (
     <div>
+
+      <ScrollToTop/>
 
         <h2
         style={{

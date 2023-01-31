@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import Loader from '../../Components/Loader';
 import Swal from 'sweetalert2';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 const FilterScreen = () => {
 
@@ -124,6 +125,8 @@ const FilterScreen = () => {
 
   return (
     <Container fluid>
+
+      <ScrollToTop/>
 
         <h2
         style={{

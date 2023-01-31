@@ -134,6 +134,8 @@ export default function Account({setTheme}) {
 
       try{
         const response = await axios.put(`${path.local}/user/${user.userId}`, {
+          username:username,
+          email:email,
           address: address,
           city: city,
           country: country,
@@ -162,7 +164,7 @@ export default function Account({setTheme}) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: err,
+          text: err.response.data,
         })
       }
 

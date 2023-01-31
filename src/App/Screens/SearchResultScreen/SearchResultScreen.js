@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 
 import path from '../../Config/servAddr';
 import Loader from '../../Components/Loader';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 
 export default function SearchResultsScreen(props) {
@@ -57,6 +58,8 @@ export default function SearchResultsScreen(props) {
 
   return (
     <div>
+
+        <ScrollToTop/>
 
         <h2
         style={{

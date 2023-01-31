@@ -10,6 +10,7 @@ import "./CheckoutScreen.css";
 import Payment from "../Payment";
 import axios from 'axios';
 import path from '../../Config/servAddr';
+import ScrollToTop from '../../Components/ScrollToTop';
 
 export default function CheckoutScreen() {
 
@@ -173,6 +174,8 @@ export default function CheckoutScreen() {
 
   return (
     <div>
+
+      <ScrollToTop/>
 
         <Container>
 

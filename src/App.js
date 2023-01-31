@@ -39,6 +39,7 @@ import HomeScreen from './App/Screens/HomeScreen/HomeScreen';
 import SearchResultScreen from './App/Screens/SearchResultScreen/SearchResultScreen';
 import FilterScreen from './App/Screens/FilterScreen/FilterScreen';
 import ProductDetailsScreen2 from './App/Screens/ProductDetailsScreen2/ProductDetailsScreen2';
+import AdminScreen from './App/Screens/AdminScreen/AdminScreen';
 // const GlobalStyle = createGlobalStyle`
 //   body {
 //     background-image: ${colors.primary};
@@ -189,6 +190,16 @@ function App() {
       </div>
     )
   }
+
+  const AdminScreenContainer = () => {
+    return (
+      <div>
+        <Navbar />
+        <AdminScreen />
+        <Footer />
+      </div>
+    )
+  }
   
   return (
     <div style={{
@@ -213,6 +224,7 @@ function App() {
         <Route path="/home/product/search/:searchQuery" element={<SearchResultScreenContainer/>}  />
         <Route path="/home/product/filter" element={<FilterScreenContainer />} />
         <Route path="/home/product/fromWishList" element={<ProductDetailsContainer2 />} />
+        <Route path="/home/admin" element={<AdminScreenContainer />} />
       </Routes>
 
 

@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import "./Navbar.css"
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import path from '../../Config/servAddr';
 
 // import { createGlobalStyle } from 'styled-components';
 
@@ -26,7 +28,14 @@ function OffcanvasExample() {
   const [navbarColor, setNavbarColor] = React.useState("transparent");
   const [searchQuery, setSearchQuery] = React.useState("");
 
+  const [user,setUser] = React.useState({});
+
+
+  
   React.useEffect(() => {
+
+    getUser();
+
     const handleScroll = () => {
       if (navRef.current) {
         if (window.pageYOffset > navRef.current.offsetTop) {
@@ -58,6 +67,23 @@ function OffcanvasExample() {
     navigate(`/home/product/search/${searchQuery}`);
   }
 
+  const getUser = async () => {
+    const currentUser = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    setUser(user);
+    // console.log(user);
+    axios.get(`${path.local}/user/find/${user.userId}`, {
+      headers: {
+        'authorization': `bearer ${user.token}`
+      }
+    }).then(res => {
+      console.log(res.data);
+      setUser(res.data);
+
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
   return (
     <>
@@ -148,6 +174,18 @@ className="linkbtn"
 className="linkbtn"
       >Account</Link>
        </a></li>
+
+      {
+        user.isAdmin?
+        <li class="myli"><a className="mya"> 
+        <Link to="/home/admin"
+    className="linkbtn"
+          >Admin</Link>
+           </a></li>
+        :
+        null
+       }
+
 
   </ul>
                   {/* <Nav.Link href="#" style={{marginLeft:"20px"}}>Home</Nav.Link>
