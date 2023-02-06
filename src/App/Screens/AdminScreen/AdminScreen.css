@@ -1,12 +1,8 @@
-.sidebar{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.adminbtn{
     align-items: center;
 
     background-color: white;
-    padding:2rem;
+    padding:1rem;
     margin:1rem;
     position: relative;
     bottom: 0;
@@ -14,7 +10,10 @@
     border-radius: 30px;
     width: 300px;
     /* box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);  */
-
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
   z-index: 1;
   background: inherit;
   overflow: hidden;
@@ -29,7 +28,7 @@
     
 }
 
-.sidebar::before{
+.adminbtn::before{
     content: "";
     position: absolute;
     background: inherit;

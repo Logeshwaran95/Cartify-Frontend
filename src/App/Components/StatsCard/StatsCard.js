@@ -1,4 +1,7 @@
-import React from 'react';
+import React,{
+  useState,
+  useEffect
+} from 'react';
 import {
   Card,
   CardContent,
@@ -8,29 +11,46 @@ import {
   useTheme,
   Avatar,
 } from '@mui/material';
+import "./StatsCard.css"
 import { Visibility, People, ShoppingCart, TrendingUp } from '@mui/icons-material';
+
 
 const StyledAvatar = styled(Avatar)(({ theme, iconColor }) => ({
   backgroundColor: iconColor,
   color: theme.palette.getContrastText(iconColor),
 }));
 
+
 const MetricCard = ({ title, value, Icon, color }) => {
+
+  
   return (
     <Card
+    id='stats'
+  
     >
-      <CardContent>
-        <Grid container spacing={2} alignItems="center">
+      <CardContent
+      >
+        <Grid container spacing={2} alignItems="center"
+        >
           <Grid item>
             <StyledAvatar iconColor={color}>
               <Icon />
             </StyledAvatar>
           </Grid>
           <Grid item>
-            <Typography color="textSecondary" gutterBottom>
+            <Typography color="textSecondary" gutterBottom
+            style={{
+              color:"white",
+              textTransform:"uppercase",
+              fontSize:"1rem",
+              fontWeight:"bold",
+              letterSpacing:"1px"
+            }}
+            >
               {title}
             </Typography>
-            <Typography variant="h5">{value}</Typography>
+            <Typography variant="h6">{value}</Typography>
           </Grid>
         </Grid>
       </CardContent>
@@ -55,10 +75,30 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const DashboardAdmin = () => {
+
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <Grid container spacing={4}
     
     >
+
+      {/* <Grid item xs={12} sm={6} md={3}>
+      <div className="card-container">
+      <div
+        className={`card ${isFlipped ? "flipped" : ""}`}
+        onClick={() => setIsFlipped(!isFlipped)}
+      >
+        <div className="card-front">
+          Front of Card
+        </div>
+        <div className="card-back">
+          Back of Card
+        </div>
+      </div>
+    </div>
+      </Grid> */}
+
       <Grid item xs={12} sm={6} md={3}>
         <MetricCard
           title="Visits"
@@ -72,11 +112,15 @@ const DashboardAdmin = () => {
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
         <MetricCard
+        className="card-front"
           title="Orders"
           value={891}
           Icon={ShoppingCart}
           color="#ff9800"
         />
+        
+
+
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
         <MetricCard

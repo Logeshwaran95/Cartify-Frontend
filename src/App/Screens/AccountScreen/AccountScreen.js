@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import path from '../../Config/servAddr';
+// import { colors } from '@mui/material';
 
 export default function Account({setTheme}) {
 
@@ -27,6 +28,18 @@ export default function Account({setTheme}) {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
+
+  const colorsArr = [
+    colors.primary,
+    "linear-gradient(to right, #f857a6, #ff5858)",
+    "linear-gradient(to right, #485563, #29323c)",
+    "linear-gradient(to right bottom, #f24444, #ff1964, #ff008e, #ff00c0, #ff00f9)",
+    "linear-gradient(-225deg, #FF3CAC 0%, #562B7C 52%, #2B86C5 100%)",
+    "linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )",
+    
+    "linear-gradient(to right, #5c258d, #4389a2)"
+  ]
+
   
   
 
@@ -323,15 +336,28 @@ size="lg"
 
 }}>
 
-<button onClick={() => {
+  {
+    colorsArr.map((color, index) => {
+      return(
+        <button onClick={() => {
+          setTheme(color);
+          localStorage.setItem(`CartifyTheme`, color);
+        }}
+        class="toggler" style={{background:color}}></button>
+      )
+    }
+    )
+  }
+
+{/* <button onClick={() => {
   setTheme(colors.primary);
   localStorage.setItem(`CartifyTheme`, colors.primary);
 }}
 class="toggler" style={{background:colors.primary}}></button>
 <button onClick={() => {
-  setTheme("linear-gradient(to right, #f2709c, #ff9472)");
-  localStorage.setItem(`CartifyTheme`, 'linear-gradient(to right, #f2709c, #ff9472)');
-}} class="toggler" style={{background:"linear-gradient(to right, #f2709c, #ff9472)"}}></button>
+  setTheme("linear-gradient(to right, #f857a6, #ff5858)");
+  localStorage.setItem(`CartifyTheme`, 'linear-gradient(to right, #f857a6, #ff5858)');
+}} class="toggler" style={{background:"linear-gradient(to right, #f857a6, #ff5858)"}}></button>
 
 
 <button onClick={() => {
@@ -350,7 +376,7 @@ class="toggler" style={{background:colors.primary}}></button>
 <button onClick={() => {
   setTheme("linear-gradient(to right, #5c258d, #4389a2)");
   localStorage.setItem(`CartifyTheme`, 'linear-gradient(to right, #5c258d, #4389a2)');
-}} class="toggler" style={{background:"linear-gradient(to right, #5c258d, #4389a2)"}}></button>
+}} class="toggler" style={{background:"linear-gradient(to right, #5c258d, #4389a2)"}}></button> */}
 
 
 </div>
