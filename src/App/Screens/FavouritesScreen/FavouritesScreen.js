@@ -62,10 +62,10 @@ export default function FavouritesScreen() {
 
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
-
+    setLoading(true);
         try{
 
-            setLoading(true);
+         
             const response = await axios.get(`${path.local}/wishlist/find/${user && user.userId}`,{
                 headers: {
                     Authorization: `bearer ${user.token}`
@@ -73,11 +73,13 @@ export default function FavouritesScreen() {
             });
             console.log(response.data[0].products);
             setWishLists(response.data[0].products);
-            setLoading(false);
+            
         }
         catch(err){
             console.log(err.response.data);
+            setWishLists([]);
         }
+        setLoading(false);
     }
 
     React.useEffect(() => {
