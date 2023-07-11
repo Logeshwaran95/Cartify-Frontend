@@ -77,7 +77,7 @@ export default function FavouritesScreen() {
         }
         catch(err){
             // console.log(err.response.data);
-            // setWishLists([]);
+            setWishLists([]);
       
         }
         
