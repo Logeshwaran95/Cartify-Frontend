@@ -24,9 +24,9 @@ export default function Cart() {
 
   const getCartItems = async () => {
     console.log("user",user);
-    setLoading(true);
+ 
     try{
-      
+      setLoading(true);
       const response = await axios.get(`${path.local}/cart/find/${user && user.userId}`,{
         headers: {
           'Authorization': `bearer ${user.token}`
@@ -41,7 +41,7 @@ export default function Cart() {
       
       console.log("in error");
       console.log(err.response.data);
-      setCartItems([]);
+      // setCartItems([]);
  
     }
     setLoading(false);

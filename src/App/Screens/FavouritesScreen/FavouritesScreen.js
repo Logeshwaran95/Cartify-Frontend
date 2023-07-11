@@ -62,10 +62,10 @@ export default function FavouritesScreen() {
 
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
-    setLoading(true);
+    
+    
         try{
-
-         
+          setLoading(true);
             const response = await axios.get(`${path.local}/wishlist/find/${user && user.userId}`,{
                 headers: {
                     Authorization: `bearer ${user.token}`
@@ -76,10 +76,13 @@ export default function FavouritesScreen() {
             
         }
         catch(err){
-            console.log(err.response.data);
-            setWishLists([]);
+            // console.log(err.response.data);
+            // setWishLists([]);
+      
         }
-        setLoading(false);
+        
+    setLoading(false);
+
     }
 
     React.useEffect(() => {
@@ -129,16 +132,11 @@ export default function FavouritesScreen() {
             letterSpacing: "1px",
         }}
         >Your Wishlist</h2>
-
-        <Loader loading={loading} />
-
-
-
          
  <div class="wish_testimonial-box-container">
 
  {
-        wishlists.length === 0 && !loading &&
+        (wishlists.length === 0) && !loading &&
         <div
         style={{
           textAlign: 'center',
@@ -158,6 +156,7 @@ export default function FavouritesScreen() {
         </div>
 
       }
+      <Loader loading={loading} />
 
         {
         wishlists && 
