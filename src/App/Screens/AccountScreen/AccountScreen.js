@@ -198,7 +198,7 @@ export default function Account({setTheme}) {
           'authorization': `bearer ${user.token}`
         }
       });
-      console.log(response.data);
+      console.log("here is ",response.data);
       Swal.fire({
         icon: 'success',
         title: 'Profile Picture Updated',
@@ -425,10 +425,10 @@ class="toggler" style={{background:colors.primary}}></button>
                     formData.append('upload_preset', 'ypic2wey');
                     axios.post('https://api.cloudinary.com/v1_1/dhkcw3quq/image/upload', formData)
                     .then((res) => {
-                      console.log(res.data.secure_url);
+                      console.log("here is url",res.data.secure_url);
+                  
+                      handleUploadToDB(res.data.secure_url)
         
-                      handleUploadToDB(res.data.secure_url);
-
                     })
                     .catch((err) => {
                       console.log(err);

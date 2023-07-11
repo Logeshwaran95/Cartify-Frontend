@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -19,15 +19,18 @@ import path from '../../Config/servAddr';
 
 export default function ProductDetailsScreen() {
 
-  
-
-
   const location = useLocation();
-
-
+  const [rerender, setRerender] = React.useState(false);
 
 
   const { product } = location.state;
+
+  useEffect(() =>{
+    window.scrollTo(0,0);
+    // setCurrImage();
+    setCurrImage(product&&product.image);
+  },[product])
+
 
   const [currImage, setCurrImage] = React.useState(product && product.image);
   const [quantity, setQuantity] = React.useState(1);
@@ -43,9 +46,13 @@ export default function ProductDetailsScreen() {
 
   const [show, setShow] = React.useState(false);
 
+  const [similarProducts,setSimilarProducts] = React.useState([]);
+
   function handleShow() {
     setShow(true);
   }
+
+  // console.log("here is product",product);
 
 
 
@@ -59,9 +66,9 @@ export default function ProductDetailsScreen() {
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
     const checkCartExist =  localStorage.getItem(`CartifyCart_${currentUser}`);
-    console.log("here is token",user.token);
+    // console.log("here is token",user.token);
 
-    console.log("here is product",product);
+    // console.log("here is product",product);
     
 
     if(!checkCartExist) {
@@ -79,7 +86,7 @@ export default function ProductDetailsScreen() {
         }
       }
 
-      console.log("myobj",myobj);
+      // console.log("myobj",myobj);
 
       try{
 
@@ -95,7 +102,7 @@ export default function ProductDetailsScreen() {
 
         
         localStorage.setItem(`CartifyCart_${currentUser}`, "true");
-        console.log(response);
+        // console.log(response);
         Swal.fire({
           title: `${product.title} Added to cart`,
           text: 'You can check your cart to proceed to checkout',
@@ -142,7 +149,7 @@ export default function ProductDetailsScreen() {
             text: 'You can check your cart to proceed to checkout',
             icon: 'success',
           })
-            console.log(response);
+            // console.log(response);
 
         }
         catch(err){
@@ -165,7 +172,7 @@ export default function ProductDetailsScreen() {
     const rating = actualrating;
     const productId = product._id;
     const numberOfReviews = reviewCount + 1;
-    console.log("rating",rating);
+    // console.log("rating",rating);
 
     const myobj = {
       rating: rating,
@@ -186,7 +193,7 @@ export default function ProductDetailsScreen() {
 			  }
 			  
 			  )
-        console.log(response);
+        // console.log(response);
     }
     catch(err){
         console.log(err);
@@ -197,8 +204,8 @@ export default function ProductDetailsScreen() {
   const handleReview = async () => {
 
       if(rating !== 0 && review !== ''){
-        console.log("rating",rating);
-        console.log("review",review);
+        // console.log("rating",rating);
+        // console.log("review",review);
         const currentUser = localStorage.getItem('currentUser');
       const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
   
@@ -218,7 +225,7 @@ export default function ProductDetailsScreen() {
           headers: { Authorization: `bearer ${user.token}` }
         }
         )
-        console.log(response.data);
+        // console.log(response.data);
         Swal.fire({
           title: 'Review Added',
           text: 'Your review has been added',
@@ -256,7 +263,7 @@ export default function ProductDetailsScreen() {
   const getAllReviews = async () => {
     try{
       const response = await axios.get(`${path.local}/review/find/${product._id}`)
-      console.log(response.data);
+      // console.log(response.data);
       setReviewData(response.data);
       setReviewCount(response.data.length);
 
@@ -269,7 +276,7 @@ export default function ProductDetailsScreen() {
         response.data.reduce((acc, item) => item.rating + acc, 0) /
           response.data.length
       )
-      console.log("actualrating",actualrating);
+      // console.log("actualrating",actualrating);
     }
     catch(err){
       console.log(err);
@@ -301,7 +308,7 @@ export default function ProductDetailsScreen() {
 
     try{
       const response = await axios.get(`${path.local}/review/find/user/${user.userId}`)
-      console.log(response.data);
+      // console.log(response.data);
 
 
       if(response.data.length >0){
@@ -332,9 +339,36 @@ export default function ProductDetailsScreen() {
     
 
   }
+  
+
+  const getSuggestions = async() => {
+ 
+    try{
+      
+      const categories = product.categories;
+      console.log("here are categories",categories);
+
+      //pass array of strings category into axios request
+
+      
+
+      const response = await axios.get(`${path.local}/product/suggest/${categories[0]}/${categories[1]}`);
+      console.log("here is response",response);
+      setSimilarProducts(response.data);
+      console.log("here are suggestions",similarProducts);
+  
+  }
+  catch(error){
+      console.log(error);
+  }
+
+  }
+
+
 
   React.useEffect(() => {
     getAllReviews();
+    product && getSuggestions();
     // getproduct();
   },[
     actualrating
@@ -349,7 +383,7 @@ export default function ProductDetailsScreen() {
     
     <div>
 
-      <ScrollToTop/>
+      {/* <ScrollToTop/> */}
 
 <Modal show={show} fullscreen onHide={() => setShow(false)}>
         <Modal.Header closeButton>
@@ -747,7 +781,9 @@ export default function ProductDetailsScreen() {
       Similar Products
     </h2>
       
-     <ProductScreen/>
+     <ProductScreen data={
+      similarProducts
+     }/>
 
     </div>
 

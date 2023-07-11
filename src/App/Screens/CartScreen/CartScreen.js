@@ -24,8 +24,9 @@ export default function Cart() {
 
   const getCartItems = async () => {
     console.log("user",user);
+    setLoading(true);
     try{
-      setLoading(true);
+      
       const response = await axios.get(`${path.local}/cart/find/${user && user.userId}`,{
         headers: {
           'Authorization': `bearer ${user.token}`
@@ -34,12 +35,16 @@ export default function Cart() {
       // console.log("here is cartitems",response.data[0].products);
       setCartItems(response.data[0].products);
       console.log("cartitems",...response.data[0].products);
-      setLoading(false);
+      
     }
     catch(err){
+      
       console.log("in error");
       console.log(err.response.data);
+      setCartItems([]);
+ 
     }
+    setLoading(false);
   }
 
   const handleRemove = async (id,title) => {
@@ -146,7 +151,7 @@ export default function Cart() {
     >
 
       {
-        cartitems.length === 0 && !loading && 
+        (cartitems.length === 0) && !loading && 
         <div
         style={{
           textAlign: 'center',
@@ -213,6 +218,7 @@ export default function Cart() {
             if(product.quantity > 1) {
               handleDecrement(product._id);
             }
+            
 
           }
           }

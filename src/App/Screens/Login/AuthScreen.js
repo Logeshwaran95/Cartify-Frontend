@@ -142,7 +142,7 @@ const Form = () => {
                      Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Invalid Email or Password or User does not exist',
+                        text: error.response.data
                     })
                   })
 
@@ -352,6 +352,7 @@ const Form = () => {
                >
         <Lock sx={{ color: 'white', mr: 1, my: 0.5 }} />
         <TextField id="input-with-sx" label="Password" variant="standard" 
+        type='password'
         color="secondary"
         style={{
             width: "15rem",
@@ -421,6 +422,7 @@ const Form = () => {
                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
         <Lock sx={{ color: 'white', mr: 1, my: 0.5 }} />
         <TextField id="input-with-sx" label="Password" variant="standard" 
+        type='password'
         color="secondary"
         style={{
             width: "15rem",
@@ -438,6 +440,7 @@ const Form = () => {
                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                <Lock sx={{ color: 'white', mr: 1, my: 0.5 }} />
                <TextField id="input-with-sx" label="Confirm Password" variant="standard" 
+               type='password'
                color="secondary"
                style={{
                    width: "15rem",

@@ -217,7 +217,6 @@ function App() {
         <Route path="/home/admin" element={<AdminScreenContainer />} />
       </Routes>
 
-
     </Router>
     </div>
   );
