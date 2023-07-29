@@ -191,7 +191,7 @@ export default function Account({setTheme}) {
       const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
       setUser(user);
 
-      const response = await axios.put(`${path.local}/user/${user.userId}`, {
+      const response = await axios.put(`${path.local}/user/${user.userId}/profilePicture`, {
         profilePicture: url
       },{
         headers:{

@@ -7,6 +7,8 @@ import { getAllByAltText } from '@testing-library/react';
 
 export default function ReviewCard(props) {
 
+    console.log(props.data);
+
     const {userName, rating, review } = props.data;
     
     const currentUser = localStorage.getItem('currentUser');

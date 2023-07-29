@@ -118,14 +118,21 @@ export default function Cart() {
     console.log("decrement",id);
     const newCart = cartitems.map((product) => {
       if(product._id === id) {
+        const newQuantity = product.quantity - 1;
+        if (newQuantity === 0) {
+          handleRemove(product.productId,product.title).then(() => {
+            getCartItems();
+          });
+          return null; // filter out the product
+        }
         return {
           ...product,
-          quantity: product.quantity - 1,
-          total: product.price * (product.quantity - 1)
+          quantity: newQuantity,
+          total: product.price * newQuantity
         }
       }
       return product;
-    })
+    }).filter(Boolean); // remove null values
     setCartItems(newCart);
   }
 
@@ -215,7 +222,7 @@ export default function Cart() {
               <div className="quantity">
           <button className="minus-btn" type="button" name="button"
           onClick={ () => {
-            if(product.quantity > 1) {
+            if(product.quantity > 0) {
               handleDecrement(product._id);
             }
             
