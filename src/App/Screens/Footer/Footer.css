@@ -194,4 +194,14 @@ footer{
       border-radius: 20px 20px 0 0;
     }
   }
+
+  .fas{
+    transition: all 0.3s ease;
+  }
+  .fas:hover{
+    color: #fff;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+  }
+
    

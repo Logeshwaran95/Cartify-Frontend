@@ -15,16 +15,16 @@ export default function Footer() {
          <p
         //  data-aos="fade-left"
          >
-            Cartify is an e-commerce website 
+            Cartify is an E-commerce website which is developed for the purpose of learning and to showcase my skills. This website is developed using MERN stack.
          </p>
        </div>
        <div class="lower">
-         <div class="topic">Contact us</div>
+         <div class="topic">Contact Developer</div>
          <div class="phone">
-           <a><i class="fas fa-phone-volume"></i>1234567890</a>
+           <a><i class="fas fa-phone-volume"></i>9345497171</a>
          </div>
          <div class="email">
-           <a><i class="fas fa-envelope"></i>Cartify@gmail.com</a>
+           <a><i class="fas fa-envelope"></i>logeshsiva395@gmail.com</a>
          </div>
        </div>
      </div>
@@ -44,7 +44,9 @@ export default function Footer() {
      <div class="right box">
        <div class="topic">Newsletter</div>
        <form action="#">
-         <input type="text" placeholder="Enter email address"/>
+         <input type="text" placeholder="Enter email address" style={{
+          color: 'black',
+         }}/>
          <input type="submit" name="" value="Subscribe"
          onClick={(e) => {
             e.preventDefault()
@@ -80,7 +82,12 @@ export default function Footer() {
      </div>
    </div>
    <div class="bottom">
-     <p>Copyright © 2023 <a href="#">Cartify </a> All rights reserved</p>
+     <p>
+     Made with &nbsp;
+        <i class="fas fa-heart"></i> 
+        &nbsp;
+        by Logeshwaran
+      </p>
    </div>
  </footer>
     </div>
