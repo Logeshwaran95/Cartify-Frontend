@@ -20,10 +20,18 @@ import path from '../../Config/servAddr';
 
 const Form = () => {
 
+   const [mobile,isMobile] = useState(false);
+
    useEffect(() => {
 
       if(localStorage.getItem('currentUser')){
          navigate('/home');
+      }
+      if(window.innerWidth < 480){
+         isMobile(true);
+      }
+      else{
+         isMobile(false);
       }
     }, []);
 
@@ -233,16 +241,33 @@ const Form = () => {
 
 
 
-   
-
    return (
       <div className={styles.container}>
+         {
+            !mobile? 
+            <ul className={styles.bg_bubbles}>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+            :null
+         }
+        
          
          <div className={styles.text}>
-            <h2 style={{fontSize:"3rem",fontWeight:800,color:"white"}}
+            <h2 className={styles.text__title}
             data-aos="zoom-out-down"
-            >Welcome to Cartify</h2>
-            <h2 style={{fontWeight:800,color:"white"}}>Your One Stop For Everything !</h2>
+            >🛒 Cartify - Your Style, Your Way! </h2>
+            <h4 className={
+               styles.text__subtitle
+            }>Shop Trendy, Shop Smart, Shop Cartify!</h4>
 
 
             <div className={styles.social_menu}
@@ -316,7 +341,7 @@ const Form = () => {
          }
       }}
     >
-      <Tab eventKey="home" title="Login">
+      <Tab eventKey="home" title="Login"  >
       <div className={styles.container1}>
                   <br></br>
                   <h2 style={{fontSize:"2rem",fontWeight:800,color:"white",marginLeft:"35%"}}>{
@@ -380,7 +405,8 @@ const Form = () => {
                     
                </div>
       </Tab>
-      <Tab eventKey="profile" title="SignUp">
+      <Tab eventKey="profile" title="SignUp"
+      >
    
       <div className={styles.container1}>
                   {/* <br></br>

@@ -98,7 +98,7 @@ export default function ReviewCard(props) {
                             userName
                         }
                       </strong>
-                      <span>@liammendes</span>
+                      {/* <span>@liammendes</span> */}
                   </div>
               </div>
            

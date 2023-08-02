@@ -31,13 +31,17 @@ export default function Account({setTheme}) {
 
   const colorsArr = [
     colors.primary,
-    "linear-gradient(to right, #f857a6, #ff5858)",
-    "linear-gradient(to right, #485563, #29323c)",
-    "linear-gradient(to right bottom, #f24444, #ff1964, #ff008e, #ff00c0, #ff00f9)",
+    'linear-gradient(to right, #ff3f7d, #ff5858)',
+   
+    'linear-gradient(135deg, #ff4d4d, #1e2038)',
     "linear-gradient(-225deg, #FF3CAC 0%, #562B7C 52%, #2B86C5 100%)",
-    "linear-gradient( 102.1deg,  rgba(96,221,142,1) 8.7%, rgba(24,138,141,1) 88.1% )",
     
-    "linear-gradient(to right, #5c258d, #4389a2)"
+    "linear-gradient(135deg, #6a3093, #a044ff)",
+    'linear-gradient(135deg, #00ff99, #1e2038)',
+    "linear-gradient(135deg, #0f2027, #203a43)",
+    'linear-gradient(135deg, #1d2671, #c33764)', // Galactic Glow Gradient
+  'linear-gradient(135deg, #03a9f4, #1e3c72)', // Oceanic Elegance Gradient
+
   ]
 
   
