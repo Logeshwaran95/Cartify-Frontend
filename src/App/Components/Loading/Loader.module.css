@@ -10,8 +10,8 @@
 
 .modalOverlay {
   position: fixed;
-  /* top: 0;
-  left: 0; */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(30, 172, 153, 0.2); /* Darker semi-transparent black background */

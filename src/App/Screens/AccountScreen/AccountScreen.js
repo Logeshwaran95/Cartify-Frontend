@@ -7,6 +7,7 @@ import colors from '../../Config/colors';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import Loader from "../../Components/Loading/Loader"
 
 
 import { Link } from 'react-router-dom';
@@ -29,6 +30,8 @@ export default function Account({setTheme}) {
   const [country, setCountry] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const colorsArr = [
     colors.primary,
     'linear-gradient(to right, #ff3f7d, #ff5858)',
@@ -45,7 +48,6 @@ export default function Account({setTheme}) {
   ]
 
   
-  
 
   const Toast = Swal.mixin({
     toast: true,
@@ -60,15 +62,19 @@ export default function Account({setTheme}) {
   })
 
   const getUserDetails = async () => {
+
+    setLoading(true);
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
     setUser(user);
     // console.log(user);
+    
     axios.get(`${path.local}/user/find/${user.userId}`, {
       headers: {
         'authorization': `bearer ${user.token}`
       }
     }).then(res => {
+      
       console.log(res.data);
       setUsername(res.data.username);
       setEmail(res.data.email);
@@ -77,14 +83,18 @@ export default function Account({setTheme}) {
       setCity(res.data.city);
       setCountry(res.data.country);
       setPhonenumber(res.data.phoneNumber);
-
+      
     }).catch(err => {
       console.log(err);
     })
+    setLoading(false);
+  
   }
 
   useEffect(() => {
+       
         getUserDetails();
+
   }, []);
 
   
@@ -148,7 +158,7 @@ export default function Account({setTheme}) {
       setUser(user);
       // console.log(user);
 
-
+      setLoading(true);
       try{
         const response = await axios.put(`${path.local}/user/${user.userId}`, {
           username:username,
@@ -185,11 +195,14 @@ export default function Account({setTheme}) {
         })
       }
 
+      setLoading(false);
+
 
   }
 }
 
   const handleUploadToDB = async (url) => {
+    setLoading(true);
     try{
       const currentUser = localStorage.getItem('currentUser');
       const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
@@ -208,6 +221,7 @@ export default function Account({setTheme}) {
         title: 'Profile Picture Updated',
         text: 'Profile Picture Updated Successfully',
       })
+      setLoading(false);
       setProfile(url);
       getUserDetails();
 
@@ -226,14 +240,18 @@ export default function Account({setTheme}) {
   return (
     <Container className='accContainer'>
 
+      {
+        loading && <Loader />
+      }
+
+
 <Modal show={showEdit} onHide={handleCloseEdit}
 size="lg"
 >
         <Modal.Header closeButton>
           <Modal.Title>Edit Profile</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          
+        <Modal.Body>          
 
         <Form>
 
@@ -395,6 +413,7 @@ class="toggler" style={{background:colors.primary}}></button>
           </Button> */}
         </Modal.Footer>
       </Modal>
+      
 
       
 
@@ -404,6 +423,9 @@ class="toggler" style={{background:colors.primary}}></button>
           textAlign:"center",
         }}
         > 
+
+        
+
           <div className="accprofile1">
           
           <div
@@ -448,6 +470,11 @@ class="toggler" style={{background:colors.primary}}></button>
             }
           }
           >
+
+            {
+              !profile && <Loader/>
+            }
+            
           <img src={
             profile? profile : "https://i.pinimg.com/originals/9a/69/29/9a6929f30854dfeffcceb163945cd3b0.png"
           } alt="Group-1" border="0"
@@ -518,6 +545,7 @@ class="toggler" style={{background:colors.primary}}></button>
                 </Button>
 
               </Link>
+              
 
 
               <Button variant="primary" className="accbtn1" style={{

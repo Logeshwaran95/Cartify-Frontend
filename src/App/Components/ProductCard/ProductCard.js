@@ -5,21 +5,18 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import path from '../../Config/servAddr';
+import Loader from '../../Components/Loading/Loader';
 
 export default function ProductCard(props) {
-
+	const [loading, setLoading] = React.useState(false);
 	const product = props.data;
 	
-
-
 	const handleAddToWishlist = async (product) => {
 
 		const currentUser = localStorage.getItem('currentUser');
 		const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
 		const checkWishlistExist =  localStorage.getItem(`CartifyWishlist_${currentUser}`);
 		console.log("here is curretnuser",currentUser);
-	
-		
 	
 		if(!checkWishlistExist) {
 	
@@ -113,7 +110,7 @@ export default function ProductCard(props) {
 	}
 
 	const handleAddToCart = async (product) => {
-
+		
 		const quantity = 1;
 		const currentUser = localStorage.getItem('currentUser');
 		const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
@@ -222,7 +219,9 @@ export default function ProductCard(props) {
   return (
 	<>
 
-
+		{
+			loading && <Loader/>
+		}
 		{product && 
 
     	<div class="product-card">

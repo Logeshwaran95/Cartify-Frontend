@@ -61,10 +61,6 @@ export default function HomeScreen() {
 
         <CarouselComp/>
 
-
-
-
-
         <h2
         className='titleText'
         >Top Rated</h2>
