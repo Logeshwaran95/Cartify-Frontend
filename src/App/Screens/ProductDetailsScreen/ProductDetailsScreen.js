@@ -15,6 +15,7 @@ import axios from 'axios';
 
 import ScrollToTop from '../../Components/ScrollToTop';
 import path from '../../Config/servAddr';
+import Loader from '../../Components/Loading/Loader';
 
 
 export default function ProductDetailsScreen() {
@@ -377,7 +378,6 @@ export default function ProductDetailsScreen() {
   return (
 
     <>
-
     {product &&
 
     

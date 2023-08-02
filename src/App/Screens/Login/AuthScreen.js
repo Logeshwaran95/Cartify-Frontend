@@ -17,10 +17,12 @@ import AOS from 'aos';
 import axios from 'axios';
 
 import path from '../../Config/servAddr';
+import Loader from '../../Components/Loading/Loader';
 
 const Form = () => {
 
    const [mobile,isMobile] = useState(false);
+   const [loading, setLoading] = useState(false);
 
    useEffect(() => {
 
@@ -116,13 +118,17 @@ const Form = () => {
    }
 
    const handleSubmit = (e) => {
+      
          e.preventDefault();
+         console.log("just set loading");
+         
 
          if(islogin){
             if(lemail !== '' && lpsswd !== ''){
 
                if(lemail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
-                  
+               
+                  setLoading(true);
                   axios.post(`${path.local}/auth/login`, {
                      email: lemail,
                      password: lpsswd
@@ -174,6 +180,7 @@ const Form = () => {
          }
          else{
             console.log("in signup");
+            
             if(semail !== '' && spsswd !== '' && sconfirmpsswd !== ''){
 
                if(!semail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
@@ -194,6 +201,7 @@ const Form = () => {
                   return;
                }
                else{
+                  setLoading(true);
                   axios.post(`${path.local}/auth/register`, {
                      username:susername,
                      email: semail,
@@ -236,6 +244,8 @@ const Form = () => {
                 })
             }
          }
+         console.log("in submit")
+         // setLoading(false);
          
    }
 
@@ -258,6 +268,9 @@ const Form = () => {
             <li></li>
           </ul>
             :null
+         }
+         {
+            loading && <Loader/>
          }
         
          

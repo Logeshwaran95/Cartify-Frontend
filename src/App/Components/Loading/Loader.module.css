@@ -1,0 +1,82 @@
+/* ModalLoader.module.css */
+@keyframes colorChange {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  /* top: 0;
+  left: 0; */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 172, 153, 0.2); /* Darker semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px); /* Stronger backdrop blur */
+  z-index: 9999;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #007bff, #ff0000); /* Radial gradient background */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Soft box shadow */
+  animation: spin 1s linear infinite, colorChange 5s linear infinite;
+}
+
+.loader {
+  border: 10px solid rgba(255, 255, 255, 0.3); /* Thicker border */
+  border-top: 10px solid #ffffff; /* Thicker top border */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite, pulse 1.5s ease infinite; /* Added pulse animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .modalOverlay{
+    margin-top: -10rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .modalOverlay{
+    margin-top: -10rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .modalOverlay{
+    margin-top: -10rem;
+  }
+}
+
