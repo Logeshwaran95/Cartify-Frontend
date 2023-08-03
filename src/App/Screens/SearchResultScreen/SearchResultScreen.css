@@ -114,9 +114,12 @@ a{
 
 .search_testimonial-box{
     transition-duration: 0.4s;
+    /* border-left: 5px solid #ffffff; */
+    border-right: 5px solid #ffffff;
+    
 }
 .search_testimonial-box:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
     transition: all 0.3s ease;
 }
  
@@ -142,7 +145,7 @@ a{
 }
 @media(max-width:790px){
     .search_testimonial-box{
-        width:100%;
+        width:90%;
     }
     .search_testimonial-heading h1{
         font-size: 1.4rem;
@@ -175,6 +178,9 @@ a{
     }
 }
 @media(max-width:600px){
+    .search_testimonial-box{
+        width:90%;
+    }
     .search_box-top{
         flex-wrap: wrap;
         margin-bottom: 10px;

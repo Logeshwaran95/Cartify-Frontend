@@ -7,6 +7,7 @@ import "./ProductScreen.css";
  const ProductScreen = (props) => {
 
     const products = props.data;
+    const recommended = props.recommend? props.recommend : "no";
   
 
     var settings = {
@@ -53,6 +54,7 @@ import "./ProductScreen.css";
                       <div>
                       <ProductCard
                       data={product}
+                      recommend={recommended}
                       />
                     </div>
           )}
@@ -60,6 +62,7 @@ import "./ProductScreen.css";
                       <div>
                       <ProductCard
                       data={product}
+                      recommend={recommended}
                       />
                     </div>
           )}
@@ -67,6 +70,7 @@ import "./ProductScreen.css";
                       <div>
                       <ProductCard
                       data={product}
+                      recommend={recommended}
                       />
                     </div>
           )}

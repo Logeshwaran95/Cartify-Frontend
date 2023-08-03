@@ -21,18 +21,29 @@ import Loader from '../../Components/Loading/Loader';
 export default function ProductDetailsScreen() {
 
   const location = useLocation();
-  const [rerender, setRerender] = React.useState(false);
+  const [,forceUpdate] = React.useState();
 
 
   const { product } = location.state;
+  const {recommend} = location.state;
+
 
   useEffect(() =>{
     window.scrollTo(0,0);
     // setCurrImage();
     setCurrImage(product&&product.image);
+    checkrerender();
+
   },[product])
 
 
+  const checkrerender = () => {
+    if(recommend!="no"){
+      getAllReviews();
+    }
+  }
+
+  // checkrerender();
   const [currImage, setCurrImage] = React.useState(product && product.image);
   const [quantity, setQuantity] = React.useState(1);
   const [currTab,setCurrTab] = React.useState('Description');
@@ -355,7 +366,7 @@ export default function ProductDetailsScreen() {
 
       const response = await axios.get(`${path.local}/product/suggest/${categories[0]}/${categories[1]}`);
       console.log("here is response",response);
-      setSimilarProducts(response.data);
+      setSimilarProducts(response.data.filter (item => item._id !== product._id));
       console.log("here are suggestions",similarProducts);
   
   }
@@ -525,6 +536,7 @@ export default function ProductDetailsScreen() {
             style={{
               color:"yellow",
             }}
+            className='rating'
             > 
             &nbsp;
             &nbsp;
@@ -783,7 +795,9 @@ export default function ProductDetailsScreen() {
       
      <ProductScreen data={
       similarProducts
-     }/>
+     }
+     recommend={true}
+     />
 
     </div>
 

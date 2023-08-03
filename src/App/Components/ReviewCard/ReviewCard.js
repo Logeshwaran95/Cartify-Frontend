@@ -13,6 +13,25 @@ export default function ReviewCard(props) {
     
     const currentUser = localStorage.getItem('currentUser');
     const user = JSON.parse(localStorage.getItem(`cartifyUser_${currentUser}`));
+    const [profile, setProfile] = React.useState({});
+
+    const getProfile = async() => {
+        const response = await axios.get(`${path.local}/user/find/${props.data && props.data.userId}`, {
+            headers: {
+                Authorization: `bearer ${user.token}`
+            }
+        }).then(res => {
+            console.log("HERE WE GO",res.data);
+            setProfile(res.data.profilePicture? res.data.profilePicture : "https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png");
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+
+    React.useEffect(() => {
+        getProfile();
+    }, [])
 
     const getReview = async() => {
         await props.gatherReviews();
@@ -89,7 +108,7 @@ export default function ReviewCard(props) {
                
                 
                   <div class="profile-img">
-                      <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
+                      <img src={profile} />
                   </div>
                 
                   <div class="name-user">

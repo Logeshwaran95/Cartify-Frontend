@@ -10,6 +10,7 @@ import Loader from '../../Components/Loading/Loader';
 export default function ProductCard(props) {
 	const [loading, setLoading] = React.useState(false);
 	const product = props.data;
+	const recommended = props.recommend? props.recommend : "no";
 	
 	const handleAddToWishlist = async (product) => {
 
@@ -227,7 +228,9 @@ export default function ProductCard(props) {
     	<div class="product-card">
 		<div class="badge">Hot</div>
 		<Link to="/home/product/" 
-		state={{product: product}}
+		state={{product: product,
+				recommend: recommended
+		}}
 		>
 		<div class="product-tumb">
 			<img src={product.image} alt=""/>
