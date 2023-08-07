@@ -7,6 +7,10 @@
 
 👉 [View Live](https://the-cartify.vercel.app/)
 
+## Backend Repo
+
+👉 [View Backend Code](https://github.com/Logeshwaran95/Cartify-Backend)
+
 ## Description
 
 Cartify is an e-commerce website built using the MERN stack, featuring an attractive glassmorphism UI and a seamless user experience. The website aims to deliver a delightful shopping experience to its users.
