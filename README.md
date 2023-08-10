@@ -3,7 +3,7 @@
 
 > Cartify Frontend
 
-## Live Demo
+## Site Link
 
 👉 [View Live](https://the-cartify.vercel.app/)
 
