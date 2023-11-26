@@ -21,10 +21,10 @@ export default function Footer() {
        <div class="lower">
          <div class="topic">Contact Developer</div>
          <div class="phone">
-           <a><i class="fas fa-phone-volume"></i>9345497171</a>
+           <a><i class="fas fa-phone-volume"></i>9361460508</a>
          </div>
          <div class="email">
-           <a><i class="fas fa-envelope"></i>logeshsiva395@gmail.com</a>
+           <a><i class="fas fa-envelope"></i>rejeban1020816@gmail.com</a>
          </div>
        </div>
      </div>
@@ -86,7 +86,7 @@ export default function Footer() {
      Made with &nbsp;
         <i class="fas fa-heart"></i> 
         &nbsp;
-        by Logeshwaran
+        by Rejeban
       </p>
    </div>
  </footer>
